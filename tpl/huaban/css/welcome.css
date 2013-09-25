@@ -1,0 +1,6 @@
+.home_cf li{float:left;line-height:34px;height:34px;min-width:51px;}
+.home_cf li a{cursor:pointer;display:block;float:left;background:url(../images/nav-n.gif) no-repeat left top;margin: 0 5px 10px 0px;line-height:34px;height:34px;padding-left:11px;_margin:0;white-space:nowrap;}
+.home_cf li a.current,.home_cf li a.cur{background:url(../images/nav-c.gif) no-repeat left top;line-height:34px;height:34px;}
+.home_cf li a span{display:inline-block;float:left;background:url(../images/nav-n.gif) no-repeat right 0;line-height:34px;height:34px;padding-right:11px;color:#8c7e7e;}
+.home_cf li a span.current,.home_cf li a span.cur{background:url(../images/nav-c.gif) right 0 no-repeat;line-height:34px;height:34px;color:#333;}
+.home_cf li a.hover{cursor:pointer;}

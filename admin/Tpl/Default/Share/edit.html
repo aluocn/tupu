@@ -1,0 +1,103 @@
+<tagLib name="fanwe" />
+<php>
+	function getTypeName($type)
+	{
+		return l("SHARE_".strtoupper($type));
+	}
+	function getShareData($data)
+	{
+		return l("SHARE_DATA_".strtoupper($data));
+	}
+</php>
+<include file="Public:header" />
+<load href="__TMPL__Static/Js/ajaxfileupload.js" />
+<load href="__TMPL__Static/Js/share.js" />
+<script type="text/javascript">
+var CONFIRM_ERROR = "{%CONFIRM_ERROR}";
+var CONFIRM_DELETE = "{%CONFIRM_DELETE}";
+</script>
+<div class="handle-btns">
+	<fanwe:linkBtn text="{%RETURN_LIST}" href="{:Cookie::get('returnUrl')}" />
+</div>
+<form method='post' id="form" name="form" action="{:U(MODULE_NAME.'/update')}" enctype="multipart/form-data">
+<table cellpadding="4" cellspacing="0" border="0" class="table-form">
+	<tr>
+		<th width="150">{%SHARE_TITLE}</th>
+		<td><input type="text" class="textinput" name="title" id="title" value="{$share.title}" style="width:90%"/></td>
+	</tr>
+	<tr>
+		<th>{%SHARE_TYPE}</th>
+		<td>
+			{$share.type|getTypeName}
+		</td>
+	</tr>
+	<if condition="$share['share_data'] eq 'paper'">
+		<tr>
+			<th>{%SHARE_CONTENT}</th>
+			<td>
+				<script type="text/javascript" src="{$path}public/js/Ckeditor/ckeditor.js"></script>
+				<script type="text/javascript" src="{$path}public/js/Ckfinder/ckfinder.js"></script>
+				<textarea id="TextArea1" name="text" cols="20" rows="2">{$paper.text}</textarea>
+				<script type="text/javascript">
+						var PATH = "<?php echo $path; ?>";
+						var TextArea1 =CKEDITOR.replace("TextArea1",{"width":"934px","height":"600px","toolbar":"Other"}) ;
+						CKFinder.setupCKEditor(TextArea1,PATH+"public/js/Ckfinder");
+				</script>
+			</td>
+		</tr>
+	<else/>
+		 <tr>
+			<th>{%SHARE_CONTENT}</th>
+			<td>
+				<textarea class="areainput" name="content" rows="8">{$share.content}</textarea>
+			</td>
+		</tr>
+		<tr>
+			<th>{%SHARE_PHOTO}</th>
+			<td>
+				<foreach name="share.share_photo" item="photo">		
+					<div class="img_list">		
+					<img src="{$photo.img}"   id="img"/>
+					<div class="blank9"></div>
+					<a class="btn_addPic" href="javascript:void(0);"><span>编辑</span>
+						<input class="filePrew" title="支持jpg、jpeg、gif、png格式，文件小于2M" tabindex="3" type="file" name="image" size="3" id="uploadShareImg" onchange="UploadShareImg();">
+					</a>
+					<a href="javascript:void(0);" onclick="del_photo({$photo.photo_id},this);" class="delphoto">{%DELETE}</a>
+					<div class="clear"></div>
+					<span>图片的链接地址</span><input type="text" name="adv_url" value="{$photo.adv_url}" />
+					<div class="clear"></div>
+					</div>
+				</foreach>
+			</td>
+		</tr>	
+	</if>
+	
+	<tr>
+		<th>{%COLLECT_COUNT}</th>
+		<td><input type="text" name="collect_count" value="{$share.collect_count}"/></td>
+	</tr>
+	<tr>
+		<th>{%RELAY_COUNT}</th>
+		<td><input type="text" name="relay_count" value="{$share.relay_count}"/></td>
+	</tr>
+	<tr>
+		<th>{%COMMENT_COUNT}</th>
+		<td><input type="text" name="comment_count" value="{$share.comment_count}"/></td>
+	</tr>
+	<tr class="act">
+		<th>&nbsp;</th>
+		<td>
+			<input type="hidden" name="share_cates" value="<foreach name="share_category" item="cate" key="key"><if condition="$key gt 0">,</if>{$cate.cate_id}</foreach>" />
+			<input type="hidden" name="share_id" value="{$share.share_id}" />
+			<input type="hidden" name="photo_id" value="{$paper.photo_id}" />
+			<input type="hidden" name="share_type" value="{$share.share_data}" />
+			<input type="hidden" name="img_url" id="img_url"/>
+			<input type="hidden" name="server_code" value="{$server_code}" />
+			<input type="submit" class="submit_btn" value="{%SUBMIT}" />
+			<input type="reset" class="reset_btn" value="{%RESET}" />
+		</td>
+	</tr>
+</table>
+</form>
+
+<include file="Public:footer" />

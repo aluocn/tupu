@@ -1,0 +1,365 @@
+<?php
+	$css_list[0]['url'][] = './tpl/css/book.css';
+	$js_list[0] = './tpl/js/book.js';
+   	
+    if($_FANWE['request']['action'] == 'share')
+    {
+    	$js_list[1] = './tpl/js/im_004.js';
+    }
+    elseif($_FANWE['request']['action'] == 'album')
+    {
+    	$js_list[1] = './tpl/js/im_006.js';
+    }
+    elseif($_FANWE['request']['action'] == 'user')
+    {
+        $js_list[1] = './tpl/js/im_005.js';
+    }
+    
+    
+    
+?>
+<!--{template inc/header}-->
+
+<div id="body">
+	<div id="content" style="width:952px;">
+    
+    	<div id="sheetbarsearch" class="board">
+        	<p>
+                <!--{if $_FANWE['request']['action'] == 'share'}-->
+                <span class="selected">{$count_result['share_count']} 采集</span>
+                <!--{else}-->
+                <a id="searchShare" href='###'>{$count_result['share_count']}个分享</a>
+            	<!--{/if}-->
+                &nbsp;·&nbsp;
+                <!--{if $_FANWE['request']['action'] == 'album'}-->
+                <span class="selected">{$count_result['album_count']} 杂志</span>
+                <!--{else}-->
+                <a id="searchBoard" href='###'> {$count_result['album_count']} 杂志</a>
+            	<!--{/if}-->
+                &nbsp;·&nbsp;
+                <!--{if $_FANWE['request']['action'] == 'user'}-->
+                <span class="selected">{$count_result['user_count']} 用户</span>
+                <!--{else}-->
+                <a id="searchUser" href='###'> {$count_result['user_count']} 用户</a>
+            	<!--{/if}-->
+                <span class="greyselected">
+                	— 搜索结果: 
+                    <span class="hilight">{$kwy_word}
+                    	<span></span>
+                   	</span>
+               	</span>
+        	</p>
+       	</div>
+        <!--{if $count >0}-->
+         <div id="searchresultlist">
+         	<!--预加载数据-->
+            
+            <!--预加载搜索的分享数据-->
+            <!--{if $_FANWE['request']['action'] == 'share'}-->
+            <!--{loop $list $share}-->
+            <div class="imBoard rightbox" dataid = "{$share['share_id']}">
+             	<div class="pin">
+                    <div class="modify">
+                        <div class="actions" style="display: none; ">
+                            <div class="left">
+                                <a haref="javascript:;" onclick="$.Relay_Share({$share['share_id']})" class="repin btn btn11 wbtn"><strong><em></em>转采</strong>
+                                <span></span>
+                                </a>
+                            </div>
+                            <div class="right">
+                                <a class="comment clickable btn btn11 wbtn"><strong><em></em>评论</strong><span></span></a>
+                                <!--{if $share['isMe']}-->
+                                    <a href="javascript:;" class="like btn btn11 wbtn" onclick="$.Edit_Share({$share['share_id']})"><strong><em></em>编辑</strong><span></span></a>
+                                <!--{elseif $share['likeStatus']}-->
+                                    <a  parent_id = {$share['parent_id']} share_id = {$share['share_id']} size=32 st='like' class="like btn btn11 wbtn"><strong><em></em>取消喜欢</strong><span></span></a>
+                                <!--{else}-->
+                                    <a  parent_id = {$share['parent_id']} share_id = {$share['share_id']} size=32 st='unlike'  class="like btn btn11 wbtn"><strong><em></em>喜欢</strong><span></span></a>
+                                <!--{/if}-->
+                            </div>
+                            
+                        </div>
+                        <div class="show-img" style="height:{$share['height']}px;">
+                            <a href="{$share['share_url']}" target="_blank">
+                                <img class="picUrl" height="{$share['height']}" src="{$share['share_img']}" width="190">
+                            </a>
+                        </div>
+                        <div class="title-sign">
+                            <p class="contentsms">{$share['content']}</p>
+                            <p class="quantity" style="display:{if $share['relay_count'] == 0 && $share['comment_count'] == 0 && $share['collect_count'] == 0} none{/if};">
+                                <span style="display:{if $share['replay_count'] == 0}none;{else}inline-block;{/if}">
+                                    <span>转发</span>
+                                    <span class="reshareNum">{$share['replay_count']}</span>
+                                </span>&nbsp;
+                                <span style="{if $share['comment_count'] == 0}display:none;{else}display:inline-block;{/if}">
+                                    <span class="pointsNum">·</span>
+                                    <span>评论</span>
+                                    <span class="commentNum">{$share['comment_count']}</span>
+                                </span>&nbsp;
+                                <span style="{if $share['collect_count'] == 0}display:none;{else}display:inline-block;{/if}">
+                                    <span class="pointsNum">·</span>
+                                    <span>喜欢</span>
+                                    <span class="likeNum">{$share['collect_count']}</span>
+                                </span>
+                            </p>
+                        </div>
+                        <ul class="comentMain">
+                            <li class="hover cf">
+                                <div class="uhead" style="height:30px;">
+                                    <a href="{$share['u_url']}">
+                                        <img src="{$share['avt']}">
+                                    </a>
+                                </div>
+                                <div class="uinfo">
+                                    <p>
+                                        <a href="{$share['u_url']}" class="gray1">{$share['user_name']}</a> 
+                                        {if $share['isOriginal'] == 1}分享到{else}转发到{/if} 
+                                        <a href="{$share['album_url']}" class="gray1">{$share['album_title']}</a>
+                                    </p>
+                                </div>
+                            </li>
+                            <!--{if count($share['comments']) > 0}-->
+                                {loop $share['comments'] $comment}
+                                    <li class="cf">
+                                        <div class="uhead" style="height:30px;">
+                                            <a href="{$comment['user_url']}"><img src="{$comment['avt']}" /></a>
+                                        </div>
+                                        <div class="uinfo">
+                                            <p>
+                                                <a href="{$comment['user_url']}" class="gray">{$comment['user_name']}</a>
+                                            </p>
+                                            <p class="recoment" commentId="{$comment['comment_id']}">
+                                                {$comment['comment']}&nbsp;<a class="gray">回复</a>
+                                            </p>
+                                        </div>
+                                    </li>
+                                {/loop}
+                            <!--{/if}-->
+                            
+                        </ul>
+                        <div class="postcomment" style="display:none;" parent_id="0">
+                            <div class="cf title">
+                                <a href="javascript:void(0)" class="x commentClose">关闭</a>
+                                添加评论
+                            </div>
+                            <div class="cf">
+                                <div class="uhead" style="height:30px;">
+                                    <a href="{$current_user['u_url']}"><img src="{$current_user['avt']}"></a>
+                                </div>
+                                <div class="commentbody">
+                                    <span class="innerborder">
+                                        <textarea class="commentTextarea" maxlength="140"></textarea>
+                                    </span>
+                                    <div class="submit cf">
+                                        <span class="floatright count">
+                                            <em class="lightblue">0</em>/140
+                                        </span>
+                                        <a class="unpincomment" href="javascript:void(0);">提交</a>
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            <!--{/loop}-->
+            <!--{/if}-->
+            
+            <!--预加载搜索的杂志社数据-->
+            
+            <!--{if $_FANWE['request']['action'] == 'album'}-->
+            <!--{loop $album_list $list}-->
+           
+            <div class="mbox">
+            	<div class="followlist">
+                	<h3 class="mboxTitle">
+                    	<!--{if $list['img_count'] > 0}--><span class="number floatright">({$list['img_count']})</span><!--{/if}-->
+                        <span class="t" title="{$list['title']}">{$list['title']}</span>
+                    </h3>
+                    <div class="list">
+                       <ul>
+                            <!--{eval $j = 1;}-->
+                            <!--{eval $list_img_counts = array(0,0,0,0,0,0,0,0,0);}-->
+                            <!--{loop $list_img_counts $imgkey $imgindex}-->
+                            <!--{eval $img = $list['album_imgs'][$imgkey];}-->
+                            <!--{if !empty($img)}-->
+                                <li style="*margin-bottom:0px; width:60px; overflow:hidden;"><a target="_blank" href="{$list['url']}"><img src="{getimg $img 60 60 1}" width="60" height="60" style="margin:0px; padding:0px;"/></a></li>
+                            <!--{else}-->
+                            <li style="width:60px;*margin-bottom:5px;"><a target="_blank" class="add_img" href="{$list['url']}"><img src="./tpl/images/no-img.gif" width="60" height="60"/></a></li>
+                            <!--{/if}-->
+                            <!--{if $j % 3 != 0}-->
+                            <li><span></span></li>
+                            <!--{/if}-->
+                            <!--{eval $j++;}-->
+                            <!--{/loop}-->
+                        </ul>                     	
+                    </div>
+                    
+                    <div class="follow">
+                        <a href="javascript:;" {if $list['uid'] == $_FANWE['uid']}onclick="$.Edit_Album({$list['id']})" {else}onclick="$.Follow_Album({$list['id']},this)"{/if} class="btn btn13 wbtn unfollow">
+                            <strong>
+                            <!--{if $list['uid'] == $_FANWE['uid']}-->
+                                编辑
+                            <!--{elseif $list['is_follow_album']}-->
+                                取消关注
+                            <!--{else}-->
+                                关注
+                            <!--{/if}-->
+                            </strong><span></span>
+               		 	</a>
+            		</div>
+                    
+                    
+                 </div>
+            </div>
+            <!--{/loop}-->
+            <!--{/if}-->
+            
+            <!--预加载搜索的用户数据-->
+            <!--{if $_FANWE['request']['action'] == 'user'}-->
+            <!--{loop $user_list $list}-->
+            <div class="mbox searchbox">
+            	<div class="followlist">
+                	<div class="userhead" style="width:190px;height:190px;">
+                    	<a href="{$list['u_url']}">
+                        	<img src="{$list['avt']}" data-pinit="registered">
+                        </a>
+                    </div>
+                    <div class="usershare">
+                    	<h2>{$list['user_name']}</h2>
+                        <p class="location less"></p>
+                    </div> 
+                {if $list['is_me'] == 1} 
+                	<div class="follow"><a href="{$list['u_url']}"  class="followuser btn btn13 wbtn" ><strong>查看</strong><span></span></a></div>
+                {elseif $list['is_follow'] == 1}
+                	<div class="follow"><a href="javascript:void(0)" onclick="$.User_Follow({$list['uid']},this,UMenuUpdateUserFollow)" class="followuser btn btn13 wbtn"><strong>已关注</strong><span></span></a></div>
+                {else}
+                	<div class="follow"><a href="javascript:void(0)" onclick="$.User_Follow({$list['uid']},this,UMenuUpdateUserFollow);" class="followuser btn btn13 wbtn"><strong>关注</strong><span></span></a></div>
+                {/if}  
+                </div>
+           </div>  
+            <!--{/loop}-->
+            <!--{/if}-->
+            <!--预加载数据结束-->
+         
+         
+         </div>
+    	<script>
+			jQuery(function($){
+				$("#searchresultlist .imBoard").hover(function(){
+					$(this).find(".modify").addClass("modifyhover");
+					$(this).find(".actions").show();
+				},function(){
+					$(this).find(".modify").removeClass("modifyhover");
+					$(this).find(".actions").hide();
+				});
+			
+				$("#searchBoard").click(function(){
+					$.Head_Search('{$kwy_word}','album');
+				});
+				
+				$("#searchShare").click(function(){
+					$.Head_Search('{$kwy_word}','share');
+				});
+					
+				$("#searchUser").click(function(){
+					$.Head_Search('{$kwy_word}','user');
+				});
+				$("#more_user").click(function(){
+					$.Head_Search('{$kwy_word}','user');
+				});
+	
+				var linkUrl = '{$link_url}',jsonUrl = '{$json_url}';
+				linkUrl = linkUrl +"&v=" +Math.random()*99999999;
+				try{
+					autoLayout.init({
+						contentID:"searchresultlist",
+						rightLoad:true,
+						leftID:[],
+						rightID:[],
+						linkUrl:linkUrl
+					});
+				}catch(e){}
+				
+				try{
+					autoLayout_album.init({
+						contentID:"searchresultlist",
+						rightLoad:true,
+						leftID:[],
+						rightID:[],
+						linkUrl:linkUrl
+					});
+				}catch(e){}
+				
+				try{
+					autoLayout_user.init({
+						contentID:"searchresultlist",
+						rightLoad:true,
+						leftID:[],
+						rightID:[],
+						linkUrl:linkUrl
+					});
+				}catch(e){}
+              	switch(ACTION_NAME){
+                       case 'share':autoLayout.eachAction(jsonUrl);break;
+                       case 'album':autoLayout_album.eachAction(jsonUrl);break;
+                       case 'user':autoLayout_user.eachAction(jsonUrl);break;
+                }                  
+				
+			});
+		</script>
+    	<!--{else}-->
+		<div class="nosearchresult">
+        	<p>抱歉没有找到"<span class="blue">{$kwy_word}</span>"相关的分享<br></p>
+            <span class="gray">建议： <br>请尽量输入常用词 <br>请尽量使用简洁的关键词</span>
+        </div>
+    	<!--{/if}-->
+    </div>
+    
+</div>
+<script type="text/javascript">
+
+jQuery(function($){
+	$("#searchBoard").click(function(){
+		$.Head_Search('{$kwy_word}','album');
+	});
+	
+	$("#searchShare").click(function(){
+		$.Head_Search('{$kwy_word}','share');
+	});
+		
+	$("#searchUser").click(function(){
+		$.Head_Search('{$kwy_word}','user');
+	});
+	$("#more_user").click(function(){
+		$.Head_Search('{$kwy_word}','user');
+	});
+});
+function UMenuUpdateUserFollow(obj,result)
+{
+	
+	if(result.status == 1)
+	{
+		$(obj).html('<strong>已关注</strong><span></span>');
+	}
+	else
+	{
+		$(obj).html('<strong>关注</strong><span></span>');
+	}
+}
+
+function UpdateUserFollow(obj,result)
+{
+	if(result.status == 1)
+	{
+				
+		$(obj).removeClass("friend-follow").addClass("unfriend-follow").html("已关注");
+	}
+	else
+	{
+		$(obj).removeClass("unfriend-follow").addClass("friend-follow").html("关注");
+	}
+}
+</script>
+<div id="imloading" class="firstload" style="display:none;"><img src="./tpl/images/loading-footer.gif" /><span>加载中…</span></div>
+<div id="firstload" class="firstload" style="display:none;"><img src="./tpl/images/end.png" /> </div>
+<!--{template inc/footer}-->

@@ -1,0 +1,24 @@
+花瓣2.0
+
+1.新增表：
+	//fanwe_user_activity_log  用户动态操作表 （首页 左侧动态、个人中心 左侧动态）
+
+	DROP TABLE IF EXISTS `fanwe_user_activity_log`;
+	CREATE TABLE `fanwe_user_activity_log` (
+	  `uid` int(11) NOT NULL,
+		`object_id`	int(11) DEFAULT '0' ,
+	  `type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1:关注，2:喜欢，3:评论，4:提到，5:信件,6:采集,7:转采',
+	  `create_time` int(11) DEFAULT '0'
+	) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
+
+
+	//fanwe_user_follow_album  用户关注的画板 
+	DROP TABLE IF EXISTS `fanwe_user_follow_album`;
+	CREATE TABLE `fanwe_user_follow_album` (
+	  `uid` int(11) DEFAULT NULL,
+	  `album_id` int(11) DEFAULT NULL,
+	  `create_time` int(11) DEFAULT '0',
+	  KEY `uid` (`uid`) USING BTREE,
+	  KEY `album_id` (`album_id`) USING BTREE
+	) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
+

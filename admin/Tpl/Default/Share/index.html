@@ -1,0 +1,210 @@
+<tagLib name="fanwe" />
+<php>
+	function getTypeName($type)
+	{
+		return l("SHARE_".strtoupper($type));
+	}
+	function getShareData($data)
+	{
+		return l("SHARE_DATA_".strtoupper($data));
+	}
+	function getCateAlbum($share_id){
+		$condition['share_id']=$share_id;
+		$album_id=M('AlbumShare')->where($condition)->getField('album_id');
+		$cid=M('AlbumShare')->where($condition)->getField('cid');
+		//获取杂志社名称
+		$condition_album['id']=$album_id;
+		$album_name=M('Album')->where($condition_album)->getField('title');
+		//获取杂志社分类
+		$condition_album_cate['id']=$cid;
+		$album_cate_name=M('AlbumCategory')->where($condition_album_cate)->getField('name');
+		return $album_cate_name.'->'.$album_name;
+	}
+</php>
+<include file="Public:header" />
+<script type="text/javascript" src="__TMPL__Static/Js/dataList.js"></script>
+<script>
+	//后台可以批量设置 通过和不通过的状态
+function set_status(obj,id,pk,val){
+	var ids =  new Array();
+	if(isNaN(id))
+	{
+		$("#" + id + " input:checked[name='key']").each(function(){
+			ids.push(this.value);
+		});
+	}
+	else
+	{
+		ids.push(id);
+		var parent = $(obj).parent().parent();
+		id = parent.parent().parent().attr('id');
+	}
+	ids = ids.join(',');
+	if(ids == '')
+		return false;
+	
+	var query = new Object();
+	query.id = ids;
+	query.key = pk;
+	query.val = val;
+	$.ajax({
+		url: APP + '?' + VAR_MODULE + '=' + CURR_MODULE + '&' + VAR_ACTION + '=change_status_js',
+		type:"POST",
+		cache: false,
+		data:query,
+		dataType:"json",
+		success: function(result){
+			if(result.isErr == 0)
+			{
+				location.reload(true);
+			}
+			else
+				$.ajaxError(result.content);
+		}
+	});
+}
+
+</script>
+<div class="handle-btns">
+	<fanwe:imageBtn id="editShare" name="editShare" value="{%EDIT}" click="editData(this,'checkList','share_id')" />
+	<fanwe:imageBtn id="removeShare" name="removeShare" value="{%REMOVE}" click="removeData(this,'checkList')" />
+	<fanwe:imageBtn id="updateShareTg" name="updateShareTg" value="通过" click="set_status(this,'checkList','status',1)" />
+	<fanwe:imageBtn id="updateShareBTg" name="updateShareBTg" value="不通过" click="set_status(this,'checkList','status',0)" />
+</div>
+<div class="search-box" style='position:relative; z-index:1;'>
+	
+    <form action="__APP__">
+		<span>{%SHARE_CONTENT}</span>
+		<input class="textinput" type="text" value="{$keyword}" name="keyword" size="12" />
+		<small></small>
+		<span>{%USER_NAME}</span>
+		<input class="textinput" type="text" value="{$uname}" name="uname" id="user_name" size="8" />
+		<small></small>
+		<span>{%SHARE_DATA}</span>
+		<select name="share_data">
+			<option value="all" <if condition="$share_data eq 'all'">selected="selected"</if> >全部</option>
+			<option value="default" <if condition="$share_data eq 'default'">selected="selected"</if> >{:l("SHARE_DATA_DEFAULT")}</option>
+			<!--<option value="goods" <if condition="$share_data eq 'goods'">selected="selected"</if> >{:l("SHARE_DATA_GOODS")}</option>-->
+			<option value="img" <if condition="$share_data eq 'img'">selected="selected"</if> >图片分享</option>
+			<option value="video" <if condition="$share_data eq 'video'">selected="selected"</if> >视频分享</option>
+			<option value="goods" <if condition="$share_data eq 'goods'">selected="selected"</if> >商品分享</option>
+			<option value="paper" <if condition="$share_data eq 'paper'">selected="selected"</if> >文章分享</option>
+			<!--<option value="goods_photo" <if condition="$share_data eq 'goods_photo'">selected="selected"</if> >{:l("SHARE_DATA_GOODS_PHOTO")}</option>-->
+		</select>
+		<!--  
+		<small></small>
+		<span>{%SHARE_CATEGORY}</span>
+		<select name="cate_id">
+			<option value="0" <if condition="$cate_id eq 0">selected="selected"</if> >{:l("SHARE_ALL")}</option>
+			<option value="-1" <if condition="$cate_id eq -1">selected="selected"</if> >无分类</option>
+			<foreach name="cate_list" item="cate_item">
+			<option value="{$cate_item.cate_id}" <if condition="$cate_id eq $cate_item['cate_id']">selected="selected"</if> >{$cate_item.cate_name}</option>
+			</foreach>
+		</select>
+		-->
+		<small></small>
+		<span>{%STATUS}</span>
+		<select name="status">
+			<option value="-1" <if condition="$status eq -1">selected="selected"</if> >{%SHARE_ALL}</option>
+			<option value="0" <if condition="$status eq 0">selected="selected"</if> >管理员未处理</option>
+			<option value="1" <if condition="$status eq 1">selected="selected"</if> >管理员已处理</option>
+		</select>
+		<input class="submit_btn" type="submit" value="{%SEARCH}" />
+		<input type="hidden" name="{:c('VAR_MODULE')}" value="{$module_name}" />
+		<input type="hidden" name="{:c('VAR_ACTION')}" value="index"  />
+	</form>
+</div>
+<script>
+	function check_pic(obj,share_id,name){
+		$height=$(document).height();
+		$width=$(document).width();
+		
+		$url='{:U('Share/getId')}';
+		$.ajax({url:$url,
+		data:'share_id='+share_id+"&width="+$width+"&height="+$height,
+		type:'POST',
+		dataType:'JSON',
+		success:function(result){
+			if(result.status){
+				//图片ID
+				img_id=result.id;
+				$("#pic_bg").show();
+				$("#pic_show").css('top',result.top);
+				$("#pic_show").css('left',result.left);
+				$("#pic_show").show();
+				$html="<div style='background-color:#fff;'>";
+				$html+="<div style='text-align:center;'>";
+				$html+="<a href='"+result.url+"' target='_blank' style='position:relative;'><img src='"+result.msg+"' >";
+				if(result.type=='video'){
+					$html+="<div class='play_video' style='top:"+result.height+"px;left:"+result.width+"px'></div>";
+				}
+				$html+='</a>';
+				$html+="<div style='text-align:center;'><input type='button' value='审核通过' onclick='check_status("+img_id+",1);' /> <input type='button' value='审核不通过'  onclick='check_status("+img_id+",0);' /> <input type='button' value='取消' onclick='check_pic_canel();' /></div>";
+				$html+='</div>';
+				$html+='</div>';
+				$("#pic_show").html($html);
+			}else{
+				alert('没有图片记录，可能已被删除');
+			}
+			
+		}
+		});
+	}
+	function check_pic_canel(){
+		$("#pic_show").html();
+		$("#pic_show").hide();
+		$("#pic_bg").hide();
+	}
+	//设置分享,status为1表示通过，0表示标记为审核未通
+	function check_status(share_id,status){
+		$url='{:U('Share/change_status')}';
+		$.ajax({
+			url:$url,
+			data:'share_id='+share_id+'&status='+status,
+			dataType:'JSON',
+			type:'POST',
+			success:function(result){
+				if(result.status==0){
+					alert('出错');
+				}
+				if(result.status==1){
+					document.location.reload();
+					clear_pic_show();
+				}
+				if(result.status==3){
+					<?php if( ($status==0)||($status==4)){  ?>
+					document.location.reload();
+					<?php }else{ ?>
+					alert('已经是该状态，无需修改');
+					<?php } ?>
+					
+				}
+			}
+		});
+	}
+	function clear_pic_show(){
+		$("#pic_show").html();
+		$("#pic_show").hide();
+		$("#pic_bg").hide();
+	}
+	
+</script>
+<div style='position:relative;'>
+<div id='pic_show' style='display:none;position:absolute; z-index:999; overflow:hidden;'>
+<div id='pic_bg' style='width:20000px;height:20000px; position:absolute; display:none; background-color:#fff; display:none;opacity:0.7;
+FILTER: alpha(opacity=70);z-index:998; top:0;'></div>
+</div>
+</div>
+<fanwe:list 
+	id="checkList" 
+	style="list" 
+	name="share" 
+	pk="share_id" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="share_id:{%ID}|50,content:{%SHARE_CONTENT}|~left,share_id|getCateAlbum:杂志社分类,user_name:{%USER_NAME}|100,create_time|toDate:{%CREATE_TIME}|100,collect_count:{%COLLECT_COUNT}|30,relay_count:{%RELAY_COUNT}|30,comment_count|getCommentCount=$share['share_id']:{%COMMENT_COUNT}|90,type|getTypeName:{%SHARE_TYPE}|90,share_data|getShareData:{%SHARE_DATA}|90,status|getStatusImg:{%STATUS}|60:toggleStatus|share_id" 
+	actionlist="editData:{%EDIT}:share_id,removeData:{%REMOVE}:share_id,check_pic:查看图片:share_id" action_width="80" />
+
+<div class="pager">{$page}</div>
+<include file="Public:footer" />

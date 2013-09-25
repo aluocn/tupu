@@ -1,0 +1,35 @@
+<tagLib name="fanwe" />
+<include file="Public:header" />
+<div class="handle-btns">
+	<fanwe:linkBtn text="{%RETURN_LIST}" href="{:U(MODULE_NAME.'/index')}" />
+</div>
+<form method='post' id="form" name="form" action="{:U(MODULE_NAME.'/insert')}">
+<table cellpadding="4" cellspacing="0" border="0" class="table-form">
+	<tr>
+		<th width="200">站点名称:</th>
+		<td><input type="text" class="textinput requireinput" name="sitename" /></td>
+	</tr>
+	
+	<tr>
+		<th>站点url:</th>
+		<td><input type="text" class="textinput requireinput" name="siteurl" />(不包含http://)</td>
+	</tr>
+	
+	<tr>
+		<th>站长联系邮箱:</th>
+		<td><input type="text" class="textinput requireinput" name="useremail" />(请务必使用真实邮箱)</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td><span style="color: red;">一键开通成功后点告联盟账户登录用户信息将直接发送到邮箱中,用户可以登录查看相应的信息 </span></td>
+	</tr>
+	<tr class="act">
+		<th>&nbsp;</th>
+		<td>
+			<input type="submit" class="submit_btn" value="一键开通" />
+			<input type="reset" class="reset_btn" value="{%RESET}" />
+		</td>
+	</tr>
+</table>
+</form>
+<include file="Public:footer" />

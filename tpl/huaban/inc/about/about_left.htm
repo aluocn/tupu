@@ -1,0 +1,14 @@
+<ul id="nav">
+	<li {if ACTION_NAME == 'index'} class="selected" {/if}>
+    	<a href="{u about/index}">什么是{$_FANWE['setting']['site_name']}</a>
+    </li>
+    <li {if ACTION_NAME == 'goodies'} class="selected" {/if}>
+    	<a href="{u about/goodies}">采集小工具</a>
+   	</li>
+    <li {if ACTION_NAME == 'help'} class="selected" {/if}>
+    	<a href="{u about/help}">帮助</a>
+   	</li>
+    <li {if ACTION_NAME == 'etiquette'} class="selected" {/if}>
+    	<a href="{u about/etiquette}">{$_FANWE['setting']['site_name']}礼仪</a>
+  	</li>
+</ul>

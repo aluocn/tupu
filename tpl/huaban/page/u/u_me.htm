@@ -1,0 +1,165 @@
+<?php
+	$css_list[0]['url'][] = './tpl/css/tweetlist.css';
+	$css_list[0]['url'][] = './tpl/css/zone.css';
+	$js_list[0] = './tpl/js/zone.js';
+    $js_list[1] = './tpl/js/im_004.js';
+?>
+<!--{template inc/header}-->
+<div id="body" class="fm990">
+		<div id="content">
+        
+        	<div id="zhimeisheetbar">
+            	<p class="bar-links">
+                	<a href="{u u/album uid=$home_uid}">{$home_user['albums']} 杂志</a>
+                    &nbsp;·&nbsp;
+                    <span class="selected">{$home_user['shares']} 采集</span>
+                    &nbsp;·&nbsp;
+                    <a href="{u u/fav uid=$home_uid}">{$home_user['favs']} 喜欢</a>
+             	</p>
+          	</div>
+            
+            <div id="contentMain">
+				<!--{template inc/u/u_menu}-->
+             	 <!--预加载数据-->
+    <!--{loop $list $share}-->
+    <div class="imBoard rightbox" dataid = "{$share['share_id']}">
+    	<div class="pin">
+        	<div class="modify">
+            	<div class="actions" style="display: none; ">
+                	<div class="left">
+                		<a haref="javascript:;" onclick="$.Relay_Share({$share['share_id']})" class="repin btn btn11 wbtn"><strong><em></em>转采</strong>
+                        <span></span>
+                        </a>
+                    </div>
+                    <div class="right">
+                        <a class="comment clickable btn btn11 wbtn"><strong><em></em>评论</strong><span></span></a>
+                        <!--{if $share['isMe']}-->
+                            <a href="javascript:;" class="like btn btn11 wbtn" onclick="$.Edit_Share({$share['share_id']})"><strong><em></em>编辑</strong><span></span></a>
+                        <!--{elseif $share['likeStatus']}-->
+                            <a  parent_id = {$share['parent_id']} share_id = {$share['share_id']} size=32 st='like' class="like btn btn11 wbtn"><strong><em></em>取消喜欢</strong><span></span></a>
+                        <!--{else}-->
+                            <a  parent_id = {$share['parent_id']} share_id = {$share['share_id']} size=32 st='unlike'  class="like btn btn11 wbtn"><strong><em></em>喜欢</strong><span></span></a>
+                        <!--{/if}-->
+                    </div>
+                    
+                </div>
+                <div class="show-img" style="height:{$share['height']}px;">
+                	<a href="{$share['share_url']}" target="_blank">
+                    	<img class="picUrl" height="{$share['height']}" src="{$share['share_img']}" width="190">
+						{if $share['is_video']}
+							<img src="{$_FANWE['site_root']}tpl/{$_FANWE['setting']['site_tmpl']}/images/play.gif" class='play' style='margin: {$share['video_style_top']}px 0 22px -{$share['video_style_right']}px;' />
+						{/if}
+                    </a>
+                </div>
+                <div class="title-sign">
+                	<p class="contentsms">{$share['content']}</p>
+                    <p class="quantity" style="display:{if $share['relay_count'] == 0 && $share['comment_count'] == 0 && $share['collect_count'] == 0} none{/if};">
+                    	<span style="display:{if $share['replay_count'] == 0}none;{else}inline-block;{/if}">
+                        	<span>转发</span>
+                            <span class="reshareNum">{$share['replay_count']}</span>
+                        </span>&nbsp;
+            			<span style="{if $share['comment_count'] == 0}display:none;{else}display:inline-block;{/if}">
+                        	<span class="pointsNum">·</span>
+                            <span>评论</span>
+                            <span class="commentNum">{$share['comment_count']}</span>
+                        </span>&nbsp;
+                        <span style="{if $share['collect_count'] == 0}display:none;{else}display:inline-block;{/if}">
+                        	<span class="pointsNum">·</span>
+                            <span>喜欢</span>
+                            <span class="likeNum">{$share['collect_count']}</span>
+                        </span>
+                    </p>
+              	</div>
+                <ul class="comentMain">
+                	<li class="hover cf">
+                    	<div class="uhead" style="height:30px;">
+                        	<a href="{$share['u_url']}">
+                            	<img src="{$share['avt']}">
+                           	</a>
+                       	</div>
+                        <div class="uinfo">
+                        	<p>
+                            	<a href="{$share['u_url']}" class="gray">{$share['user_name']}</a> 
+                                {if $share['isOriginal'] == 1}分享到{else}转发到{/if} 
+                                <a href="{$share['album_url']}" class="gray">{$share['album_title']}</a>
+                           	</p>
+                        </div>
+                    </li>
+                    <!--{if count($share['comments']) > 0}-->
+                    	{loop $share['comments'] $comment}
+                        	<li class="cf">
+                            	<div class="uhead" style="height:30px;">
+                        			<a href="{$comment['user_url']}"><img src="{$comment['avt']}" /></a>
+                                </div>
+                                <div class="uinfo">
+                                	<p>
+                                    	<a href="{$comment['user_url']}" class="gray">{$comment['user_name']}</a>
+                                    </p>
+                                    <p class="recoment" commentId="{$comment['comment_id']}">
+                                    	{$comment['comment']}&nbsp;<a class="gray">回复</a>
+                                    </p>
+                                </div>
+                            </li>
+                        {/loop}
+                    <!--{/if}-->
+                    
+                </ul>
+                <div class="postcomment" style="display:none;" parent_id="0">
+                	<div class="cf title">
+                    	<a href="javascript:void(0)" class="x commentClose">关闭</a>
+                        添加评论
+                    </div>
+                    <div class="cf">
+                    	<div class="uhead" style="height:30px;">
+                        	<a href="{$current_user['u_url']}"><img src="{$current_user['avt']}"></a>
+                       	</div>
+                        <div class="commentbody">
+                        	<span class="innerborder">
+                            	<textarea class="commentTextarea" maxlength="140"></textarea>
+                            </span>
+                            <div class="submit cf">
+                            	<span class="floatright count">
+                                	<em class="lightblue">0</em>/140
+                                </span>
+                                <a class="unpincomment" href="javascript:void(0);">提交</a>
+                            </div>
+                       </div>
+                  	</div>
+              	</div>
+           	</div>
+      	</div>
+    </div>  
+    <!--{/loop}-->
+    
+            </div>
+			<div id="imloading" class="firstload" style="display:none;"><img src="./tpl/images/loading-footer.gif" /><span>加载中…</span></div>
+			<div id="firstload" class="firstload" style="display:none;"><img src="./tpl/images/end.png" /> </div>
+		</div>
+	</div>
+</div>
+<script>
+jQuery(function($){
+$("#contentMain .imBoard").hover(function(){
+					$(this).find(".modify").addClass("modifyhover");
+					$(this).find(".actions").show();
+				},function(){
+					$(this).find(".modify").removeClass("modifyhover");
+					$(this).find(".actions").hide();
+				});
+				
+var linkUrl = '{$link_url}',jsonUrl = '{$json_url}';
+linkUrl = linkUrl +"&v=" +Math.random()*99999999;
+autoLayout.init({
+contentID:"contentMain",
+rightLoad:true,
+leftID:["leftLabel"],
+rightID:"",
+linkUrl:linkUrl,
+pageAuto: true,
+loadingID:"imloading"
+});
+autoLayout.eachAction(jsonUrl);
+});
+
+</script>
+<!--{template inc/footer}-->

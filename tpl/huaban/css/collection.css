@@ -1,0 +1,125 @@
+/* CSS Document */
+#content {width: 952px;margin: 0 auto;}
+#content {z-index: 2;}
+/*左侧开始*/
+#aboutleft {width: 144px;float: left;padding-top: 18px;}
+#aboutright {width: 808px;float: right;border-top: 3px solid #65C5B3;background: white;}
+.aboutmenu li {background: url(../images/about_02.gif) no-repeat left bottom;height: 40px;line-height: 40px;}
+.aboutmenu li a {color: #1D8B74;font-size: 14px;padding-left: 15px;}
+.aboutmenu li a {display: block;}
+.aboutmenu li a.cur {color: black;font-weight: bold;background: url(../images/about_03.gif) no-repeat right;}
+.aboutmenu li.noline {background: 0;}
+
+/*左侧结束*/
+
+
+/*右侧开始*/
+#aboutright {width: 808px;float: right;border-top: 3px solid #65C5B3;background: white;}
+.aboutmain {margin: 0 46px;}
+.bottomblank2 {padding-bottom: 90px;}
+.aboutmain h2 {border-bottom: 1px solid #E0DEDE;padding-top: 8px;line-height: 40px; font-weight:normal;}
+.aboutmain h2 span {font-size: 20px;font-family: 'Microsoft Yahei';padding-right: 8px; font-weight:normal;}
+.pintool {background: #FFFCCE;padding: 18px 0;text-align: center;margin-top: 24px;position: relative;}
+
+.pintool a.move {background: url(../images/button_1.gif) no-repeat left top;height: 37px;display: inline-block;text-indent: -99999px;overflow: hidden;vertical-align: middle;width: 130px;cursor: move;}
+.f14 {font-size: 14px;}
+.pintool .pl {background: url(../images/pl.gif) no-repeat left center;padding-left: 20px;}
+.room .browser {font-size: 16px;font-family: "微软雅黑";padding: 24px 0 10px 0;border: 0;}
+.room .browser em{ font-style:normal;}
+.blue {color: #1D8B74;}
+.room ul li {margin-bottom: 8px;}
+.room .lo {background: url(../images/no_1.gif) no-repeat;width: 20px;height: 20px;text-align: center;line-height: 20px;color: black;display: inline-block;}
+.room .pr {background: url(../images/pr.gif) no-repeat;padding-left: 60px;height: 27px;display: inline-block;vertical-align: middle;line-height: 27px;}
+.room .say {color: #888;padding: 24px 0 16px;width: 560px;}
+.schematic {padding: 0;height: 16px;width: 551px;font-family: "微软雅黑";font-size: 16px;line-height: 16px;background: url(../images/schematic.gif) no-repeat 0 1px;padding: 0 0 12px 16px;margin-bottom: 13px;border-bottom: 1px solid #E0DEDE;font-weight: bold;margin-top: 16px;}
+.pintool a.move:hover {background: url(../images/button_1.gif) no-repeat left bottom;}
+
+
+/*右侧结束*/
+
+/*弹出框样式开始*/
+.pinlayout {width: 680px;padding: 36px 0 36px 40px;margin: 0 auto;}
+.pinlayout .index-img {width: 208px;float: left;}
+.pinlayout .index-img ul li {width: 60px;height: 60px;overflow: hidden;float: left;margin: 0 6px 6px 0;display: inline;}
+.pinlayout .index-img ul li.onlyone {width: 190px;height: 190px;overflow: hidden;}
+.pinlayout .index-img ul li img {width: 60px;height: 60px;}
+.pinlayout .index-img ul li.onlyone img {width: 190px;height: 190px;}
+.grouplayout {float: left;}
+.pin-fixed {position: fixed;width: 400px;}
+.grouplayout .selectgroup {padding-bottom: 16px;}
+.combox {position: relative;display: inline-block;height: 28px;margin: 0;padding: 0;white-space: nowrap;border: 1px #D9D9D9 solid;border-image: initial;}
+.comboxText {cursor: pointer;border: 0 none;height: 28px;line-height: 28px;padding: 0;margin: 0;overflow: hidden;background: url(../images/select_bg.gif) repeat-x;padding-left: 11px;border-right: 1px solid #EDEDED;font-size: 14px;border-image: initial; float:left;}
+.comboxArrow {display: inline-block;background-image: url(../images/arrow.gif);cursor: pointer;overflow: hidden;width: 25px;height: 28px;vertical-align: middle;_margin-top: -1px; float:right;}
+.combox .pannel {left: -1px;}
+.pannel {position: absolute;display: none;background: white;border: 1px #D7D6D6 solid;overflow: hidden;z-index: 100;border-image: initial;}
+.pannel ul {overflow: auto;font-size: 14px;}
+.comboxAdd {background: #EFF8F6;padding: 11px 0 11px 11px;}
+.pannel li {height: 30px;line-height: 30px;padding: 0 0 0 11px;cursor: pointer;}
+.pannel li {float: none;width: auto;padding: 0 0 0 11px;}
+.pannel li.select {background-color: #EFF8F6;}
+.comboxAdd {background: #EFF8F6;padding: 11px 0 11px 11px;}
+span.innerborder {border-bottom: 1px solid #E7E7E7;display: inline-block;position: absolute;vertical-align: middle;}
+span.innerborder {position: static;}
+.comboxAdd{ position:relative;}
+.comboxAdd .innerborder {vertical-align: baseline;}
+.deftest {width: 196px;border: 1px solid #AAA;padding-left: 6px;height: 22px;line-height: 22px;background: url(../images/input_bg.gif) repeat-x top;font-family: Tahoma,Arial,Helvetica,STHeiti,"微软雅黑";font-size: 16px;border-image: initial;position: relative;
+top: 2px;_top:13px;_left:13px;}
+/*.comboxAdd .innerborder .deftest {height: 28px;line-height: 28px;background: white;}
+ * 
+ */
+.comboxAdd .addsort { cursor:pointer; background: url(../images/button_11.gif) no-repeat left bottom;width: 110px;height: 27px;display: inline-block;line-height: 27px;color: #1D8B74;padding-left: 18px;vertical-align: middle;margin-left: 3px;border: 0;border-image: initial; position:absolute; right:10px; top:11px;}
+.commentbox {margin-bottom: 16px;}
+.album_cid{ display:block; position:absolute; left: 155px;top: 13px;height:24px;}
+.commentbox textarea {vertical-align: bottom;border: 1px solid #AAA;border-bottom: 0;width: 361px;padding: 5px;height: 75px;overflow: hidden;resize: none;background: url(../images/input_bg.gif) repeat-x white;border-image: initial;}
+.saynumber {background: #F3F3F3;line-height: 24px;padding: 0 10px;color: #888;border: 1px solid #AAA;border-top: 0;width: 351px;margin-top: -2px;display: block;height: 24px;border-image: initial;}
+.saynumber {background: #F3F3F3;line-height: 24px;padding: 0 10px;color: #888;border: 1px solid #AAA;border-top: 0;width: 351px;margin-top: -2px;display: block;border-image: initial;}
+.saynumber {line-height: 24px;color: #888;}
+.submit {clear: both;padding-top: 8px;}
+.grouplayout .submit {padding-left: 0;}
+.submit .share {display: inline-block;margin-top: 8px;color: #888;}
+.submit .size {display: inline-block;line-height: 16px;height: 16px;vertical-align: middle;_vertical-align: bottom;_font-family: "宋体";}
+.submit .size {display: inline-block;line-height: 16px;vertical-align: bottom;width: 45px	9;}
+a.bigbutton, span.bigbutton {background-image: url(../images/big_btn.gif);background-repeat: no-repeat;line-height: 42px;height: 42px;display: inline-block;width: 84px;vertical-align: middle;text-align: center;zoom: 1;color: white;font-size: 14px;}
+a.bigbuttongray, span.bigbuttongray {background-image: url(../images/big_btngray.gif);}
+a.calloff, span.calloff {background-position: -288px top;color: #CCC;text-shadow: 0 1px 0 white;}
+.smstips {background-image: url(../images/tipsmess.gif);background-repeat: no-repeat;display: inline-block;}
+span.smserror em {background-position: right -31px;padding-right: 12px;color: #F86;height: 31px;line-height: 31px; font-style:normal;}
+#pannel .deftest {width: 122px;}
+#jquery-submitfrom{ cursor:pointer;}
+.addpinimg {padding: 32px 0 0 32px;}
+.addpinlist li {float: left;width: 350px;padding-right: 20px;padding-bottom: 32px;}
+.addpinlist .imgct {float: left;width: 72px;padding: 2px 0 0 2px;}
+.imginfoct {float: left;}
+.addpinlist .imgshadow {background: #D7D5D5;position: absolute;padding-bottom: 2px;padding-right: 2px;z-index: 1;}
+.addpinlist .imgshadow .imgct2 {width: 60px;position: relative;margin-top: -2px;margin-left: -2px;}
+.addpinta {margin-top: 20px;}
+.divshareouter {margin: 0 32px;border-top: 1px solid #D6D6D6;}
+.divshareinner {border-top: 1px solid white;padding-top: 26px;text-align: center;}
+.pininfo {font-size: 14px;padding-bottom: 30px;}
+.inputspan {border-bottom: 1px solid #E7E7E7;}
+.inputspan textarea {border: 1px solid #AAA;background: url(../images/input_bg.gif) repeat-x white;overflow: hidden;width: 268px;height: 79px;resize: none;outline: 0;border-image: initial;}
+.submit label {display: inline-block;width: 16px;height: 16px;vertical-align: middle;text-indent: -9999px;overflow: hidden;margin-left: 6px;margin-right: 6px;}
+.addpinlist .pannel ul{ width:269px; height:105px;}
+.addpinlist .pannel li{ width:240px; padding-right:0px; padding-bottom:0px;}
+.addpinlist .pannel .deftest{ width:80px;}
+
+/*弹出框样式结束*/
+
+/*分享成功页面样式开始*/
+.shareok {background: url(../images/border.gif) no-repeat;height: 159px;width: 640px;padding-top: 30px;margin: 46px auto 0;}
+.aligncenter {text-align: center;}
+.shareok .true {background: url(../images/true.gif) no-repeat left center;padding-left: 20px;font-size: 20px;font-family: "微软雅黑";}
+.lightblue {color: #65C5B3;}
+.gray {color: #888;}
+
+/*分享成功页面结束*/
+
+/*公用*/
+.cf, .clearfix {zoom: 1;}
+.cf::after, .clearfix::after {content: '';display: block;clear: both;height: 0;overflow: hidden;visibility: hidden;}
+.floatright {float: right;}
+
+
+
+
+

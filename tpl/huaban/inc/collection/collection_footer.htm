@@ -1,0 +1,15 @@
+</body>
+<?php
+    $default_js = array();
+	$default_js[] = './public/js/lang.js';
+	$default_js[] = './public/js/setting.js';
+	$default_js[] = './public/js/jquery.bgiframe.js';
+	$default_js[] = './public/js/jquery.weebox.js';
+	$default_js[] = './public/js/ajaxfileupload.js';
+	$default_js[] = './public/js/jquery.dragsort.js';
+?>
+<script type="text/javascript" src="{script $default_js}" defer="true"></script>
+<!--{loop $js_list $js}-->
+<script type="text/javascript" src="{script $js}"></script>
+<!--{/loop}-->
+<!--{dynamic getScript}-->

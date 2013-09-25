@@ -1,0 +1,101 @@
+<tagLib name="fanwe" />
+<include file="Public:header" />
+<div class="handle-btns">
+	<fanwe:linkBtn text="{%RETURN_LIST}" href="{:U(MODULE_NAME.'/index')}" />
+</div>
+<form method='post' id="form" name="form" action="{:U(MODULE_NAME.'/insert')}" enctype="multipart/form-data">
+<table cellpadding="4" cellspacing="0" border="0" class="table-form">
+	<tr>
+		<th width="150">{%NAME}</th>
+		<td><input type="text" class="textinput requireinput" name="name" size="60" /></td>
+	</tr>
+	<tr>
+		<th>{%ADV_PAGE}</th>
+		<td>
+			<select name="page">
+				<option value="index">{%PAGE_INDEX}</option>
+				<!--<option value="sharelist">{%PAGE_SHARELIST}</option>-->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td>
+			<p>{%ADV_PAGE_TIPS}</p>
+		</td>
+	</tr>
+	<tr>
+		<th>{%IMG}</th>
+		<td>
+			<input type="file" class="fileinput" name="img" size="30" />
+		</td>
+	</tr>
+	<tr>
+		<th>{%TYPE}</th>
+		<td>
+			<select name="type" id='typeSelect'>
+				<option value="1">{%TYPE_1}</option>
+				<option value="2">{%TYPE_2}</option>
+				<option value="3">{%TYPE_3}</option>
+				<!--<option value="4">{%TYPE_4}</option>-->
+				<option value="5">{%TYPE_5}</option>
+				<option value="6">{%TYPE_6}</option>
+				<!--<option value="7">{%TYPE_7}</option>-->
+				<option value="8">{%TYPE_8}</option>
+			</select>
+		</td>
+	</tr>
+	<tr class="TYPE TYPE_1">
+		<th>{%CID}</th>
+		<td>
+			<fanwe:select name='cid' first='{%ROOT_ID}' textfield='name' valuefield='id' options='cate_list' />
+		</td>
+	</tr>
+	<tr class="TYPE TYPE_1">
+		<th>{%TAGS}</th>
+		<td>
+			<textarea name="tags" class="textinput areainput" rows="3"></textarea>
+		</td>
+	</tr>
+	<tr class="TYPE TYPE_1">
+		<th>&nbsp;</th>
+		<td>
+			<p>{%TAGS_TIPS}</p>
+		</td>
+	</tr>
+	<tr class="TYPE TYPE_2 hidden">
+		<th>{%URL}</th>
+		<td>
+			<input type="text" class="textinput" name="url" size="60" value="" />
+		</td>
+	</tr>
+	<tr class="TYPE TYPE_8 hidden">
+		<th>{%SHARE_ID}</th>
+		<td>
+			<input type="text" class="textinput" name="share_id" size="10" value="" />
+		</td>
+	</tr>
+	<tr>
+		<th>{%SORT}</th>
+		<td>
+			<input type="text" class="textinput" name="sort" value="10" />
+		</td>
+	</tr>
+	<tr class="act">
+		<th>&nbsp;</th>
+		<td>
+			<input type="submit" class="submit_btn" value="{%SUBMIT}" />
+			<input type="reset" class="reset_btn" value="{%RESET}" />
+		</td>
+	</tr>
+</table>
+</form>
+<script type="text/javascript">
+jQuery(function($){
+	$("#typeSelect").change(function(){
+		$(".TYPE").hide();
+		$(".TYPE_" + this.value).show();
+	});
+});
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,46 @@
+<?php
+	$css_list[0]['url'][] = './tpl/css/about.css';
+?>
+<!--{template inc/header}-->
+
+<div id="content" class="cf">
+	<!--{template inc/about/about_left}-->
+    <div id="main">
+    	<div class="about">
+    		<div class="about-top"></div>
+	    	<div class="fa">
+	        	<h2>什么是"采集到{$_FANWE['setting']['site_name']}"？</h2>
+	            <p>采集图片和网页地址的书签栏工具</p>
+	            <a href="{u about/goodies}"><img src="./tpl/images/tool_intro.jpg" class="tool-intro"></a>
+	       	</div>
+			<div class="about-bottom"></div>
+		</div>
+		<div class="about">
+			<div class="about-top"></div>
+	        <div class="fa">
+	        	<h2>什么是画板？</h2>
+	            <p>画板是某种主题的集合。<br>
+	你可以把各种各样的采集放入不同画板，并以你的方式给画板命名。比如："灵感，我爱你"、"我要把家装成这样"、"吸引我的去处"。
+				</p>
+	       	</div>
+			<div class="about-bottom"></div>
+		</div>
+		<div class="about">
+			<div class="about-top"></div>
+	        <div class="fa">
+	        	<h2>如何安装采集小工具？</h2>
+	            <p>详见<a href="{u about/goodies}" style="color:#CB2027;">安装流程</a></p>
+	       	</div>
+			<div class="about-bottom"></div>
+		</div>
+		<div class="about">
+			<div class="about-top"></div>
+	        <div class="fa">
+	        	<h2>如您在使用过程中遇到其它问题，请联系我们</h2>
+	            <p>电子邮箱:<a href="mailto:{$_FANWE['setting']['site_service_email']}" class="mail">{$_FANWE['setting']['site_service_email']}</a></p>
+	       	</div>
+			<div class="about-bottom"></div>
+		</div>
+    </div>
+</div>
+<!--{template inc/footer}-->

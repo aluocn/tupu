@@ -1,0 +1,80 @@
+body {font-size: 12px;text-align: center;font: normal 12px Arial,"宋体";color: black;line-height: 1.5 ; position:relative;}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, ul {
+text-align: left;}
+
+
+#sheetbarsearch{position: relative;min-height: 24px;margin: 10px 0 15px;padding: 10px 0 12px;text-shadow: 0 1px rgba(255, 255, 255, .9);border: double rgba(34, 25, 25, .14);border-width: 3px 0;}
+#sheetbarsearch p {margin: 4px 0 0;padding: 0;font-size: 1.8em;line-height: 1em;font-weight: 300;color: #211922;border-width: 0;}
+#sheetbarsearch p span {margin-left: 5px;}
+#sheetbarsearch p span.selected {margin: 0;color: #CB2027;}
+
+#sheetbarsearch p span.greyselected {margin: 0;color: #8C7E7E;}
+#sheetbarsearch span.hilight {font-size: 1em;font-weight: 600;float: none;vertical-align: 5%; color:#8C7E7E;}
+
+
+
+
+.sheet {border-left: 3px solid #65C5B3;background: url(../images/home.png) no-repeat white 15px 13px;height: 47px;margin: 0 17px 12px 0;box-shadow: 0 1px 2px rgba(34,25,25,0.2);_background: url(../images/home.gif) no-repeat white 15px 13px;}
+#order {line-height: 1.5;padding-top: 6px;}
+.sheet div {padding-right: 6px;}
+.floatright {float: right;}
+.sheet .dot {background: url(../images/dot.gif) no-repeat center center;}
+.dot {../images/zxx_dotted.gif) repeat-x 0 bottom;}
+.sheet span.pointleft {background: url(../images/pointleft.gif) no-repeat center center;width: 3px;}
+.sheet span.searchtitle {font-weight: bold;margin-left: 32px;}
+.sheet span, .sheet a.sheetname {font-size: 14px;height: 33px;display: block;_display: inline;padding: 14px 6px 0;float: left;}
+.sheet {background: url(../images/search_icon.gif) no-repeat scroll 12px 16px white;margin: 0 7px 12px;}
+
+.friendlist {padding: 16px 0 13px;background: white;margin-bottom: 12px;box-shadow: 0 1px 3px rgba(34,25,25,0.4);}
+.friendlist ul#userList {border-bottom: 1px solid #F1F1F1;padding: 0 0 12px 13px;height: 74px;overflow: hidden;}
+.friendlist ul li {float: left;width: 229px;margin: 0 0 20px;height: 74px;}
+.friendlist ul li .uhead {float: left;}
+.friendlist ul li .uinfo {float: left;padding-left: 12px;}
+a.buttonfollow, span.buttonfollow {background-image: url(../images/link.png);_background-image: url(../images/link.gif);background-repeat: no-repeat;width: 62px;height: 28px;line-height: 28px;text-align: center;display: inline-block;vertical-align: middle;font-size: 12px;}
+.friendlist .more {padding-top: 8px;padding-left: 13px;}
+.lightblue {color: #65C5B3;}
+a.unfriend-follow {background-position: -1px -156px;text-shadow: 0 1px 0 white;color: #CCC;width: 64px;padding-left: 0;text-align: center;}
+a.unfriend-follow:hover {background-position: -73px -156px;text-decoration: none;color: #999;}
+a.friend-follow {background-position: -1px -125px;padding-left: 27px;width: 37px;color: #1D8B74;text-align: left;}
+a.friend-follow:hover {background-position: -73px -125px;}
+a.button:hover, a.submitbtn:hover, a.unaddin, a.bigbutton:hover, a.longbutton:hover, a.friend-follow:hover, a.unpincomment:hover, a.send-mail:hover {text-decoration: none;}
+#searchresultlist {position: relative;}
+.nosearchresult {background: url(../images/notice_03.gif) no-repeat;padding: 30px 0 40px 200px;width: 346px;margin: 0 auto;line-height: 22px;margin-top: 60px;}
+.nosearchresult p {font-size: 16px;padding-bottom: 8px;}
+
+#searchresultlist .searchbox {height: 309px;box-shadow: 0 1px 3px rgba(34,25,25,0.4);padding-bottom: 0;}
+.mbox { position:absolute;margin: 0 1px 16px;display: inline;background: white;width: 222px;height: 288px;overflow: hidden;padding-bottom: 4px; left:-200px; top:1000px;}
+.searchbox .followlist {padding-top: 13px;}
+.followlist {padding: 0 13px;border-image: initial;}
+.searchbox .userhead {width: 190px;height: 190px;}
+.searchbox .userhead a:hover {opacity: .9;filter: alpha(opacity=90);}
+.searchbox .userhead a {display: block;height: 190px;width:190px;background-color: #F2F0F0;overflow: hidden;}
+.searchbox .usershare {padding: 6px 0;}
+.searchbox .usershare h2{display: block;height: 18px;font-size: 18px;line-height: 1em;font-weight: 300;padding: 10px 0 5px;white-space: nowrap;overflow: hidden; color:#444;}
+.searchbox .usershare  .location {height: 4px;margin-bottom: 8px;font-size: 13px;white-space: nowrap;overflow: hidden; display:block;}
+
+.followlist .follow {text-align: center;padding: 4px 0 12px 0; width:190px;}
+.followlist .follow a{ display:block;}
+a.longbutton, span.longbutton {background-image: url(../images/option_btn.gif);background-repeat: no-repeat;line-height: 36px;height: 36px;display: inline-block;width: 190px;vertical-align: middle;text-align: center;zoom: 1;color: #1D8B74;font-size: 14px;}
+a.concern {background-position: left top;}
+.mbox.hover .followlist {border: 3px solid #65C5B3;border-image: initial;}
+a.unconcern:hover {background-position: -207px -46px;color: #999;}
+.searchbox .usershare em{font-style:normal; color:#888;}
+a.concern:hover {background-position: -207px top;}
+a.unconcern {background-position: left -46px;color: #CCC;text-shadow: 0 1px 0 white;}
+.followlist h3 {padding: 10px 0 6px 0; line-height:1.5; font-weight:normal;}
+.mbox h3 .number { margin-right:5px;}
+.mbox h3 .t {font-size: 14px;position: relative;display: inline-block; font-weight:bold;}
+.followlist .list {height: 200px;}
+.followlist .list li{ float:left; overflow:hidden; margin:0px; padding:0px;}
+.followlist .list li span{display:block; height:60px; width:8px; margin:0px; padding:0px;}
+.mbox.hover .followlist .list{opacity: .8;filter: alpha(opacity=80);}
+
+
+
+#body{ position:relative; }
+.f14 {font-size: 14px;}
+.b {font-weight: bold;}
+.blue {color: #1D8B74;}
+.gray {color: #888;}
+a:focus, a:active, a:visited {outline: 0;}

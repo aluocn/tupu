@@ -1,0 +1,37 @@
+<tagLib name="fanwe" />
+<include file="Public:header" />
+<script type="text/javascript" src="__TMPL__Static/Js/dataList.js"></script>
+
+	<form method='post' id="form" name="form" action="{:U(MODULE_NAME.'/update')}">
+<table cellpadding="4" cellspacing="0" border="0" class="table-form">
+	<tr>
+		<th width="200">是否开启:</th>
+		<td><select name="is_open">
+        	<option value="1" <if condition="$google['is_open'] eq 1"> selected="selected"</if>  >是</option>
+            <option value="0" <if condition="$google['is_open'] eq 0"> selected="selected"</if>  >否</option>
+        </select></td>
+	</tr>
+
+	<tr>
+		<th>JS代码:</th>
+		<td>
+			<textarea name="google_js" id="google_js" style="width: 300px; height: 70px;">{$google.google_js}</textarea>
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td><span style="color: red;">Google广告设置位置是在详细页中</span></td>
+	</tr>
+	<tr class="act">
+		<th>&nbsp;</th>
+		<td>
+			<input type="submit" class="submit_btn" value="修改" />
+			<input type="reset" class="reset_btn" value="{%RESET}" />
+		</td>
+	</tr>
+</table>
+</form>
+	
+
+
+<include file="Public:footer" />

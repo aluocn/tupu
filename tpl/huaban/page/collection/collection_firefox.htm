@@ -1,0 +1,49 @@
+<?php
+	$css_list[0]['url'][] = './tpl/css/collection.css';
+?>
+<!--{template inc/header}-->
+<div id="content" class="cf">
+<div id="aboutleft">
+<ul class="aboutmenu">
+<li><a href="{u collection/index}" class="cur">收集工具</a></li>
+</ul>
+</div>
+<div id="aboutright">
+<div class="aboutmain bottomblank2">
+<h2><span>收集工具</span>方便快捷地收集网页中的图片，随时保存到你的图格中。</h2>
+<div class="room">
+<div class="pintool">
+<a  id="move-zhimei" class="move" href="javascript:void(
+(function(w,d,n,e)
+{
+d[n]&&typeof d[n].init=='function'?d[n].init():( e= document.createElement('script'),
+e.setAttribute('type','text/javascript'),
+e.setAttribute('charset','UTF-8'),
+e.setAttribute('src','{$_FANWE[site_url]}public/js/im.ping.js?v='+Math.random()*9999999),
+document.body.appendChild(e))
+}
+)(window,document,'TUPU')
+);" >{$_FANWE['setting']['site_name']}采图</a>
+
+<span class="pl f14">直接拖拽左侧按钮到书签栏即可</span>
+</div>
+<h2 class="browser">您正在使用的是<em class="blue">{$browser}</em>浏览器，请按以下步骤安装收集工具：</h2>
+<ul class="f14">
+<li style="margin-bottom:4px"><span class="lo">1</span> 如果没有书签工具条：点击"书签" <span class="pr ff">"查看书签工具栏"</span></li>
+<li><span class="lo">2</span> 直接拖拽"拖拽我"按钮到书签栏即可</li>
+<li><span class="lo">3</span> 当你浏览网页的时候，点击"知美·收集"工具将网页上面的图片保存到知美网</li>
+</ul>
+<div class="say">
+添加"知美·收集"工具后，当你浏览网页时就能够批量抓取图片及来源地址到你的图格中。您还可以同步到微博、QQ空间、 人人网，一键搞定，再也不用麻烦的存图再上传啦！<br>知美工具只支持抓取大于200*200的图片。
+</div>
+<div class="schematic">示意图演示</div>
+<div class="f14 gray">安装示意图</div>
+<div><img src="./tpl/images/firefox.gif"></div>
+<div class="f14 gray" style="padding:20px 0 14px 0">使用示意图</div>
+<div><img src="./tpl/images/help_pin.jpg" ></div>
+</div>
+</div>
+</div>
+</div>
+
+<!--{template inc/footer}-->

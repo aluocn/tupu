@@ -1,0 +1,37 @@
+
+<div id="shareshow" class="grayline cf">
+	<h2 class="f14">{$share_detail['content']}</h2>
+    <div class="shw" id="shw_height">
+        <div class="shw_head"> </div>
+        <div class="shw_body">
+            <div class="image" >
+            	<!--{if $pns['prev'] !=0}-->
+                <a class="flow_left" href="{u note/index sid=$pns['prev']}" id="flow_left" style="display:none;"></a>
+                <!--{/if}-->
+                
+                <!--{if $pns[next] !=0}-->
+                <a class="flow_right" href="{u note/index sid=$pns['next']}" id="flow_right" style="display:none;"></a>
+                <!--{/if}-->
+                
+                <!--{if $current_type == 'bao'}-->
+                <a class="add_to_album_btn" href="javascript:;" style="display: none;" onclick="$.Show_Rel_Album({$current_img_id},'goods');"></a>
+                <!--{else}-->
+                <a class="add_to_album_btn" href="javascript:;" style="display: none;" onclick="$.Show_Rel_Album({$current_img_id},'photo');"></a>
+                <!--{/if}-->
+                <a href="{if $share_detail['is_refer'] == 1} $share_detail['refer_url']{else}{$current_img}{/if}" target="_blank" class="show_big"><img src="{getimg $current_img 468 468}"  id="img_height"/></a>&nbsp;
+            </div>
+            <input type="hidden" value="{$pns['prev']}" id="user_share_prev" />
+            <input type="hidden" value="{$pns['next']}" id="user_share_next" />
+        </div>
+        <div class="shw_foot"> </div>
+    </div>
+    <!--{if $share_detail['is_refer'] == 1}-->
+    <div class="addtags cf">
+        <span class="floatright">来源：
+            <a href="{$share_detail['refer_url']}" class="blue" target="_blank">{cutstr $share_detail['refer_url'] 32}</a>
+        </span>
+    </div>
+    <!--{/if}-->
+    <div class="blank9"></div>
+</div>
+

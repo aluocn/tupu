@@ -1,0 +1,224 @@
+<!--{template inc/collection/collection_header}-->
+<form method="post" id="u_zone_form">
+<input type="hidden" id="pageUrl" value="{$pageUrl}" name="pageUrl">
+	<div class="addpinimg cf">
+    	<div class="pininfo">
+			要快速把全部图片放入一个图格中，请<a id="jquery-submitfrom" class="blue underline">批量设置这些图片</a>
+		</div>
+        <ul class="addpinlist" id="addpin-textarea">
+        	<!--{eval $indx = 1;}-->
+        	<!--{loop $img_list $img}-->
+			<li {if $indx % 2 == 0} style="margin-right:0px;" {/if}> 
+				<div class="imgct">
+					<div class="imgshadow">
+						<div class="imgct2">
+							<img src="{$img}" width="60" height="60" class="SHARE_IMG">
+						</div>
+					</div>
+				</div>
+				<div class="imginfoct">
+					<div class="selectgroup">
+                    	<span class="combox" style="width:269px;">
+                        	<input class="comboxText" style="width:232px" readonly="readonly" type="text" value="选择杂志社">
+                        	<span class="comboxArrow"></span>
+                        	<input class="comboxValue" type="hidden" value="">
+                        	<div class="pannel" style="width: 269px; display: none; " rel="2">
+                        	</div>
+                        </span>
+					</div>
+					<div class="addpinta">
+						<span class="inputspan"><textarea length="140" position="0"></textarea></span>
+					</div>
+				</div>
+			</li>
+            <!--{eval $indx++;}-->
+            <!--{/loop}-->
+		</ul>
+	<!--{if $count_video>0}-->
+		<ul class="video_list"  style="display: none;">
+			<!--{loop $video_list $video}-->
+			<li><a href="{$video}" class="SHARE_VIDEO">视频</a></li>
+			<!--{/loop}-->
+		</ul>
+	<!--{/if}-->
+    </div>
+    <div class="divshareouter">
+		<div class="divshareinner">
+			<div class="submit" id="submitDiv">
+                <span class="floatright share">
+                    <span class="size" id="pin-chechbox" style="">同步到微博:</span>
+                    <span>
+                        <input id="checkbox-4" type="checkbox"">
+                    </span>
+                </span> 
+				<span id="msgTips" class="smstips smserror" style="display: none; "><em class="smstips"></em></span>
+				<a id="savePinSingle" class="bigbutton calloff bigbuttongray" href="javascript:void(0);">分享</a>
+			</div>
+		</div>
+	</div>
+</form>
+<script>
+var isUpload = false;
+
+var ALBUM_SELECT_ID = 0;
+
+$("#jquery-submitfrom").click(function(){
+	var url = location.href;
+	location.href = url + "&showType=0";	
+});
+
+$(".combox").hover(function(){
+	$(this).css("border","1px solid #65c5b3");		
+},function(){
+	$(this).css("border","1px solid #EDEDED");		
+});
+$(".pannel li").live("mouseover",function(){
+	$(this).removeClass("out");
+	$(this).addClass("over");	
+}).live('mouseout',function(){
+	$(this).removeClass("over");
+	$(this).addClass("out");	
+}).live('click',function(){
+	var _parent = $(this).parent().parent().parent();
+	$(_parent).children(".comboxText").val($(this).attr("default"));
+	$(_parent).children(".comboxText").attr("aid",$(this).attr("value"));
+	checkFormList();
+	$(this).parent().parent().hide();	
+});
+$(".comboxArrow").click(function(){
+	getAlbumList(this);
+});
+	
+$("#savePinSingle").click(function(){
+	if($(this).hasClass("calloff"))
+	{
+		return;	
+	}
+    else
+	{
+		$(this).removeClass("callon").addClass("calloff").html("发送中...");
+	}
+    
+	var _length = $(".comboxText").length;
+	var _pageUrl = $("#pageUrl").val();
+	
+	var _aidArray = [];
+	var _videoArray= [];
+	var _titleArray = [];
+	var _textareaArray = [];
+	var _imgArray = [];
+	for(var j=0;j<_length;j++)
+	{
+		var _aid = $(".comboxText:eq("+j+")").attr("aid");
+		var _title = $(".comboxText:eq("+j+")").val();
+		var _share_content = $.trim($("textarea:eq("+j+")").val());
+		var _share_src = $(".SHARE_IMG:eq("+j+")").attr("src");
+		var _share_video=$(".SHARE_VIDEO:eq("+j+")").attr("href");
+		_aidArray[j] = _aid;
+		_titleArray[j] = _title;
+		_textareaArray[j] = _share_content;
+		_imgArray[j] = _share_src;
+		_videoArray[j]=_share_video;
+	}
+	var pub_out_check = 0;
+	if($("#checkbox-4").attr("checked") == true)
+	{
+		pub_out_check = 1;
+	}
+	var query = new Object();
+	query.pageUrl = _pageUrl;
+	query.aidArray = _aidArray;
+	query.contentArray = _textareaArray;
+	query.imgArray = _imgArray;
+	query.titleArray = _titleArray;
+	query.pub_out_check = pub_out_check;
+	query.videoArray=_videoArray;
+	
+	$.ajax({
+			url: SITE_PATH+"services/service.php?m=collectshare&a=sharelist",
+			type: "POST",
+			data:query,
+			dataType: "json",
+			success: function(result){
+				if(result.status == 1)
+					location.href = result.success_url;
+				else
+					alert(result.message);
+			}
+	});
+});	
+		
+$(".comboxText").click(function(){
+	getAlbumList(this);
+});
+$(".comboxArrow").click(function(){
+	getAlbumList();
+});
+$("textarea").bind("keyup",function(){
+	checkFormList();
+});
+
+
+function checkFormList()
+{
+	var flag = 0;
+	var _length = $(".comboxText").length;
+	for(var j=0;j<_length;j++)
+	{
+		var _aid = $(".comboxText:eq("+j+")").attr("aid");
+		try{
+			if(_aid.length > 0)
+			{
+				flag = 1;
+			}
+		}catch(e){ 
+			flag = 0;
+			break;
+		}
+	}
+	if(flag == 1)
+	{
+		for(var i=0;i<_length;i++)
+		{
+			var content = $.trim($("textarea:eq("+i+")").val());
+			
+			if(content.length > 0)
+			{
+				flag = 1;
+			}
+			else
+			{
+				flag = 0;
+				break;
+			}
+		}
+	}
+	if(flag == 1)
+	{
+		$("#savePinSingle").removeClass("calloff").addClass("callon");
+	}
+	else
+	{
+		$("#savePinSingle").removeClass("callon").addClass("calloff");
+	}
+}
+
+function getAlbumList(obj)
+{
+	var query = new Object();
+	query.aid = ALBUM_SELECT_ID;
+	query.type = 'more';
+	$.ajax({
+		url: SITE_PATH+"services/service.php?m=share&a=selectalbum",
+		type: "POST",
+		data:query,
+		dataType: "json",
+		success: function(result){
+			 var _pannel = $(obj).siblings(".pannel");
+			 $(_pannel).html(result.html).show();
+		}
+	});
+}
+
+</script>
+<!--{template inc/collection/collection_footer}-->

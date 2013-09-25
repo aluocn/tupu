@@ -1,0 +1,3 @@
+<?php 
+return  array("is_open" =>'1' ,"google_js" =>"%3Cscript+type%3D%22text%2Fjavascript%22%3E%3C%21--%0D%0Agoogle_ad_client+%3D+%22ca-pub-2883863014773940%22%3B%0D%0A%2F%2A+%E6%9C%80%E6%97%85%E5%B9%BF%E5%91%8A+%2A%2F%0D%0Agoogle_ad_slot+%3D+%228872840410%22%3B%0D%0Agoogle_ad_width+%3D+468%3B%0D%0Agoogle_ad_height+%3D+60%3B%0D%0A%2F%2F--%3E%0D%0A%3C%2Fscript%3E%0D%0A%3Cscript+type%3D%22text%2Fjavascript%22%0D%0Asrc%3D%22http%3A%2F%2Fpagead2.googlesyndication.com%2Fpagead%2Fshow_ads.js%22%3E%0D%0A%3C%2Fscript%3E" , );
+?> 

@@ -1,0 +1,5 @@
+﻿2.12升级到2.13
+在表XXX_sys_conf (XXX:表的前缀) 增加了2个字段，分别是
+IPHONE_APK_URL：iphone手机客户端的下载页面链接
+ANDROID_APK_URL:android手机客户端的下载页面链接
+   

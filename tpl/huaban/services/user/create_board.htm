@@ -1,0 +1,38 @@
+<div class="alL" id='create_board'>
+
+    <div> 创建杂志社：        <input type="text" name="create_board_title" value="" class="text" style="width:300px;" id='create_board_title'>
+
+    </div>
+
+    <div style="font-size:14px;line-height:200%;" class="clearfix">
+          
+        杂志社分类？<br>
+		<ul class="newtuge">
+			<!--{loop $_FANWE['cache']['albums']['category'] $category}-->
+        <li>
+            <input onclick="get_tuge_title(this.value)" type="radio" name="acid" value="{$category['id']}">{$category['name']}<br>
+       
+       </li>
+	   		<!--{/loop}-->
+	   </ul>
+
+    </div>
+	<input type='hidden' value='' id='create_board_cate_id'>
+    <div align="center" style="margin:20px 0;">
+        <input type="button" onclick="create_board_new();" value="确认" class="N_but" style="padding:5px;*padding:0;_padding:0;">
+        <input type="button" onclick="$.weeboxs.close();" class="btn_w" value="取消" style="padding:5px;*padding:0;_padding:0;"></div>
+</div>
+<script>
+  function get_tuge_title(cid){
+  	if(cid>0){
+		$('#create_board_cate_id').attr('value',cid);
+	}else{
+		alert('出错');
+	}
+  }
+  function create_board_new(){
+  	cate_id=$("#create_board_cate_id").attr('value');
+	title=$("#create_board_title").attr('value');
+	$.New_Create_Album_new(cate_id,title);
+  }
+</script>

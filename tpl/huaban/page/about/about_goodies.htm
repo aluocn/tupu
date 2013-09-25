@@ -1,0 +1,153 @@
+<?php
+	$css_list[0]['url'][] = './tpl/css/about.css';
+?>
+<!--{template inc/header}-->
+
+<div id="content" class="cf">
+	<!--{template inc/about/about_left}-->
+    <div id="main">
+    	<div class="about">
+	    	<div class="about-top"></div>
+			<div style="padding-bottom: 15px;" class="fa">
+	        	<h2 style="margin-bottom: 24px;">安装书签栏采集工具</h2>
+	            <div class="tutor">
+	            	<a href="javascript:void(
+						(function()
+							{
+								var e= document.createElement('script');
+								e.setAttribute('type','text/javascript');
+								e.setAttribute('charset','UTF-8');
+								e.setAttribute('src','{$_FANWE[site_url]}public/js/im.ping.js?v='+Math.random()*99999999);
+								document.body.appendChild(e)
+							}
+						)()
+					);" onclick="javascript:alert('把这个按钮拖到你的浏览器书签栏'); return false;" class="pin-button">
+	                采集到{$_FANWE['setting']['site_name']}
+	                </a>
+	                ← 把这个按钮拖到你的浏览器书签栏
+	          	</div>
+	            <div class="tip-words">
+	            	没有找到书签栏？试试
+	                <span class="key-tip">Ctrl + Shift + B</span>
+	           	</div>
+			</div>
+			<div class="about-bottom"></div>
+        </div>
+	        <ul class="slidefaq">
+	        	<li class="clearfix">
+	        		<div class="about">
+	        			<div class="about-top"></div>
+						<div class="fa" style="padding-top:0;">
+			            	<h2 class="title chrome">谷歌浏览器</h2>
+			                <div class="content">
+			                	<div class="inner">
+			                    	<h3>问：我的浏览器找不到书签栏，怎么办？</h3>
+			                    	<p>答：打开菜单"书签"，勾选"显示书签栏"</p>
+			                        <img src="./tpl/images/guide_tab2_05.jpg" height="280px">
+			                  	</div>
+			              	</div>
+						</div>
+						<div class="about-bottom"><div>
+					</div>
+	          	</li>
+	            <li class="clearfix ">
+	            	<div class="about">
+	        			<div class="about-top"></div>
+						<div class="fa" style="padding-top:0;">
+			            	<h2 class="title hot-to-use">如何使用</h2>
+			                <div style="display:none;" class="content">
+			                	<ul id="how_to_use" class="inner">
+			                    	<li>
+			                        	<span>上网浏览时发现感兴趣的图</span>
+			                            <img src="./tpl/images/intro_img_001.jpg">
+			                      	</li>
+			                        <li class="two">
+			                        	<span>点击"采集到{$_FANWE['setting']['site_name']}"，选择要采集的图片</span>
+			                            <img src="./tpl/images/intro_img_002.jpg">
+			                       	</li>
+			                        <li class="three">
+			                        	<span>采集成功！你喜欢的图片会被保存在{$_FANWE['setting']['site_name']}</span>
+			                            <img src="./tpl/images/intro_img_003.jpg">
+			                      	</li>
+			                  	</ul>
+			               	</div>
+						</div>
+						<div class="about-bottom"></div>
+					</div>
+	           	</li>
+	            <li class="clearfix">
+	            	<div class="about">
+	            		<div class="about-top"></div>
+						<div class="fa" style="padding-top:0;">
+							<h2 class="title ie">IE浏览器</h2>
+			                <div style="display:none;" class="content">
+			                	<div class="inner">
+			                    	<h3>问：我的浏览器找不到收藏夹栏，怎么办？</h3>
+			                        <p>答：打开菜单"查看-工具栏"，勾选"收藏夹栏"</p>
+			                        <img src="./tpl/images/guide_tab2_01.jpg" height="280px">
+			                        <h3>问：我是IE用户，我明明已经收藏成功，但我的收藏栏里没有"采集到{$_FANWE['setting']['site_name']}"</h3>
+			                        <p>
+			                        	答：请在保存书签时，保存到<img src="./tpl/images/textimg_01.jpg">
+			                            而不是<img src="./tpl/images/textimg_01-05.jpg">
+			                       	</p>
+			                        	<img src="./tpl/images/guide_st2_tab3_001.jpg" height="240px">
+			                 	</div>
+			             	</div>
+						</div>
+						<div class="about-bottom"></div>
+					</div>
+	         	</li>
+	            <li class="clearfix">
+	            	<div class="about">
+	            		<div class="about-top"></div>
+	            			<div class="fa" style="padding-top:0;">
+				            	<h2 class="title firefox">火狐浏览器</h2>
+				                <div style="display:none;" class="content">
+				                	<div class="inner">
+				                    	<h3>问：我的浏览器找不到书签栏，怎么办？</h3>
+				                        <p>答：打开菜单"查看-工具栏"，勾选"书签工具栏"</p>
+				                        <img src="./tpl/images/guide_tab2_04.jpg" height="280px">
+				                   	</div>
+				               	</div>
+							</div>
+						<div class="about-bottom"></div>
+					</div>
+	         	</li>
+	            <li class="clearfix">
+	            	<div class="about">
+	            		<div class="about-top"></div>
+	            			<div class="fa" style="padding-top:0;">
+				            	<h2 class="title other-problams">反正搞不定</h2>
+				                <div style="display:none;" class="content">
+				                	<div class="inner">
+				                    	<p>亲，把问题反馈给我们，我们来帮你搞定！你可以：</p>
+				                        <p>
+				                        	1. 在<a href="mailto:{$_FANWE['setting']['site_service_email']}" class="mail">{$_FANWE['setting']['site_service_email']}</a>发邮件，告诉我们遇到的问题
+				                       	</p>
+				                        <p>
+				                        	2. 要不你换个浏览器吧。比如<a href="http://www.google.com/chrome/" target="_blank">Chrome</a>，
+				                            <a href="http://firefox.com.cn/" target="_blank">Firefox</a>
+				                       	</p>
+				                  	</div>
+				              	</div>
+							</div>
+						<div class="about-bottom"></div>
+					</div>
+	         	</li>
+	       	</ul>
+    </div>
+</div>
+<!--{template inc/footer}-->
+<script>
+jQuery(function($){
+	$(".slidefaq .fa").toggle(function(){
+		$(this).children(".content").fadeIn("slow");
+	},function(){
+		$(this).children(".content").fadeOut("slow");
+	});
+	
+});
+</script>
+
+
+

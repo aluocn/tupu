@@ -1,0 +1,20 @@
+﻿2.13升级到3.0
+后台添加首页信息页面,可以了解版本号,和相应的系统信息
+完善审核功能,若开启开启首页审核，则默认的状态为未审核;否则 未已审核
+修复getImgName
+修改手机端的sharelist,增加了审核判断
+后台添加添加check_grant检测数据库权限 ，添加的位置有 admin/common/common.php,/install/Lib/Action/IndexAction.class.php,core/function/global.func.php
+在share表中添加`check_status`,用来区别 未审核通过的管理中，哪些是管理员已经处理过
+在share中添加is_video,用来表示是否是视频;同时将 share_photo中标识为视频的，全部设置is_video=1(在程序中实现)
+增加 商品添加（支持淘宝 拍拍）
+增加视频添加   （支持 优酷,凤凰视频,ku6,土豆）
+增加 新建杂志社
+优化 图片采集功能，添加水印功能
+在sys_conf表添加site_video，用来存放站点视频。
+如果用户输入默认的albun.php,则让用户跳转到u/album
+后台可以批量设置 通过和不通过的状态
+修复本地上传，GIF动态图片 会自动转化为JPEG的BUG
+修正JS加载 出现图片重叠的BUG
+瀑布流 图片设置最大高度，超过最大高度，则限制
+修正IE6下PNG的BUG
+升级又拍接口

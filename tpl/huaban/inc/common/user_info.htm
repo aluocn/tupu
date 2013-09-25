@@ -1,0 +1,114 @@
+<!--{if $_FANWE['uid'] > 0}-->
+<ul id="sysmenus" class="sysmenu">
+    	<li><a href="{u index/index}" class="regmenu no-icon">首页</a>
+		<!--{if $_FANWE['setting']['android_apk_url'] || $_FANWE['setting']['iphone_apk_url']}-->
+		<li id="apk"> 
+			<a href="javascript:;" class="regmenu"  onclick="return false;">手机端<span></span></a>
+			<ul>
+				<!--{if $_FANWE['setting']['iphone_apk_url']}-->
+				<li><a href="{$_FANWE['setting']['iphone_apk_url']}" target="_blank">苹果手机应用</a></li>
+				<!--{/if}-->
+				<!--{if $_FANWE['setting']['android_apk_url']}-->
+				<li><a href="{$_FANWE['setting']['android_apk_url']}" target="_blank">安卓手机应用</a></li>
+				<!--{/if}-->
+			</ul>
+		</li>
+		<!--{/if}-->
+      <!--
+	    <li><a href="javascript:void(0)" class="regmenu" onclick="$.User_Share()">添加<span class="plus-icon"></span></a></li>
+       -->
+	    <li><a href="javascript:void(0)" class="regmenu" onclick="$.All_Share()">添加<span class="plus-icon"></span></a></li>
+	    <li id="about">
+        	<a href="#" class="regmenu" onclick="return false;">关于
+        	<span></span></a>
+            <ul>
+            	<li>
+                	<a href="{u about/index}">关于{$_FANWE['setting']['site_name']}</a>
+                </li>
+                <li>
+                	<a href="{u about/goodies}">采集工具</a>
+                </li>
+                <li>
+                	<a href="{u about/help}">帮助</a>
+                </li>
+                <li>
+                	<a href="{u about/etiquette}">{$_FANWE['setting']['site_name']}礼仪</a>
+                </li>
+            </ul>
+        </li>
+        <li id="user_nav">
+        	<a href="{u u/album}" class="regmenu">
+            	<img src="{avatar $_FANWE['uid'] s 1}" width="22" height="22">{$_FANWE['user_name']}<span></span>
+            </a>
+            <ul>
+                <li><a href="{u u/album}">{lang common/album}</a></li>
+                <li><a href="{u u/talk uid=$_FANWE['uid']}">采集</a></li>
+                <li><a href="{u u/fav uid=$_FANWE['uid']}">喜欢</a></li>
+                <li><a href="{u u/message uid=$_FANWE['uid']}">私信</a></li>
+				<li class="divider"><a href="{u u/fans uid=$_FANWE['uid']}">我的粉丝</a></li>
+				<li><a href="{u u/follow uid=$_FANWE['uid']}">我的关注</a></li>
+				<li><a href="{u u/friends uid=$_FANWE['uid']}">双向关注</a></li>
+				<li class="divider"><a href="{u invite/index}">邀请&amp;查找好友</a></li>
+                <li class="divider"><a href="{u settings/personal}">帐号设置</a></li>
+                <li><a href="{u user/logout}">退出登录</a></li>
+        </ul>
+        </li>
+</ul>
+<!--{else}-->
+	<ul id="sysmenus" class="sysmenu">
+    	<li><a href="{u index/index}" class="regmenu no-icon">首页</a>
+		<!--{if $_FANWE['setting']['android_apk_url'] || $_FANWE['setting']['iphone_apk_url']}-->
+		<li id="apk"> 
+			<a href="#" class="apk-url" onclick="return false;">手机端
+			<span></span>
+			</a>
+			<ul>
+				<!--{if $_FANWE['setting']['iphone_apk_url']}-->
+				<li><a href="{$_FANWE['setting']['iphone_apk_url']}" target="_blank">苹果手机应用</a></li>
+				<!--{/if}-->
+				<!--{if $_FANWE['setting']['android_apk_url']}-->
+				<li><a href="{$_FANWE['setting']['android_apk_url']}" target="_blank">安卓手机应用</a></li>
+				<!--{/if}-->
+			</ul>
+		</li>
+		<!--{/if}-->
+        <li id="about">
+        	<a href="#" class="regmenu">关于
+        	<span></span></a>
+            <ul>
+            	<li>
+                	<a href="{u about/index}">关于{$_FANWE['setting']['site_name']}</a>
+                </li>
+                <li>
+                	<a href="{u about/goodies}">采集工具</a>
+                </li>
+                <li>
+                	<a href="{u about/help}">帮助</a>
+                </li>
+                <li>
+                	<a href="{u about/etiquette}">{$_FANWE['setting']['site_name']}礼仪</a>
+                </li>
+            </ul>
+        </li>
+		<li><a href="{u user/login}" class="regmenu no-icon">{lang login}</a></li>
+	</ul>
+<!--{/if}-->
+<script>
+		jQuery(function(){
+			$("#about").hover(function(){
+				$(this).children("ul").show();
+			},function(){
+				$(this).children("ul").hide();
+			});
+			$("#user_nav").hover(function(){
+				$(this).children("ul").show();
+			},function(){
+				$(this).children("ul").hide();
+			});
+			$("#apk").hover(function(){
+				$('#apk').children("ul").show(); 
+			},function(){
+				$('#apk').children("ul").hide();
+			});
+		});
+</script>

@@ -1,0 +1,18 @@
+<div class="list">
+       <ul>
+            <!--{eval $j = 1;}-->
+            <!--{eval $list_img_counts = array(0,0,0,0,0,0,0,0,0);}-->
+			<!--{loop $list_img_counts $imgkey $imgindex}-->
+			<!--{eval $img = $album_imgs[$imgkey];}-->
+			<!--{if !empty($img)}-->
+				<li style="*width:60px;*margin-bottom:5px;"><a target="_blank" href="{$album_url}"><img src="{getimg $img 60 60 1}" width="60" height="60" /></a></li>
+			<!--{else}-->
+			<li style="*margin-bottom:5px;"><a target="_blank" class="add_img" href="{$album_url}"><img src="./tpl/images/no-img.gif" width="60" height="60"/></a></li>
+			<!--{/if}-->
+            <!--{if $j % 3 != 0}-->
+            <li><span></span></li>
+            <!--{/if}-->
+            <!--{eval $j++;}-->
+			<!--{/loop}-->
+        </ul>                     	
+</div>

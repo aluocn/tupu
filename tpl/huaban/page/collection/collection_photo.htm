@@ -1,0 +1,144 @@
+<!--{template inc/collection/collection_header}-->
+<form method="post" id="u_zone_form">
+<input type="hidden" id="pageUrl" value="{$pageUrl}" name="pageUrl">
+<div class="pinlayout cf">
+	<div class="index-img" id="thumb0">
+		<ul class="cf">
+        	<!--{if $count_img <= 1}-->
+			<li class="onlyone">
+            		<img src="{$imgs}" class="SHARE_IMG">
+    		</li>
+            <!--{else}-->
+            	<!--{loop $img_list $img}-->
+                <li>
+            		<img src="{$img}" class="SHARE_IMG">
+                </li>
+            	<!--{/loop}-->
+            <!--{/if}-->
+		</ul>
+	<!--{if $count_video>0}-->
+		<ul class="video_list" style="display: none;">
+			<!	--{loop $video_list $video}-->
+			<li><a href="{$video}" class="SHARE_VIDEO">视频</a></li>
+			<!--{/loop}-->
+		</ul>
+	<!--{/if}-->
+	</div>
+	<div class="grouplayout">
+		<div class="pin-fixed">
+        	<!--{if $count_img > 1}-->
+        	<p class="say f14">
+				批量添加后，这些图片会被放入同一个图格，<br> 并且都使用同样的描述，要分开添加，请
+                <a class="blue underline" id="jquery-submitfrom">分别设置这些图片</a>
+			</p>
+            <!--{/if}-->
+            
+			<div class="selectgroup">
+                 <span class="combox" style="width:372px;">
+                 	<input class="comboxText" style="width:335px" readonly="readonly" type="text" value="选择杂志社">
+                    <span class="comboxArrow"></span>
+                    <input class="comboxValue" type="hidden" value="">
+                    <div class="pannel" id="pannel" style="width: 372px; display: none; ">
+                    </div>
+                 </span>
+			</div>
+            
+			<div class="commentbox margin">
+				<textarea id="addTitle0" class="PUB_TXT" name="content" length="140" position="0">{$content}</textarea>
+					<div class="saynumber">
+						<span class="floatright"><em id="sharenumid0" class="blue WORD_COUNT">{$content_len}</em>/140</span>
+					</div>
+			</div>
+			<div class="submit" id="submitDiv">
+				<span class="floatright share">
+                    <span class="size" id="pin-chechbox" style="">同步到微博:</span>
+                    <span>
+                        <input id="checkbox-4" type="checkbox"">
+                    </span>
+				</span>
+				<span id="msgTips" class="smstips smserror" style="display: none; ">
+                	<em class="smstips"></em>
+                </span>
+				<a id="btnSaveBoardPic0" class="bigbutton bigbuttongray calloff" href="javascript:void(0);">分享</a>
+                <input type="hidden" name="albumid" class="PUB_ALBUM_ID" value="0"  id="albumid" />
+				<input type="hidden" name="module" value="collectshare" />
+				<input type="hidden" name="action" value="save" />
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+<script>
+var isUpload = false;
+
+var ALBUM_SELECT_ID = 0;
+$("#jquery-submitfrom").click(function(){
+	var url = location.href;
+	location.href = url + "&showType=1";	
+});
+
+$(".combox").hover(function(){
+	$(this).css("border","1px solid #65c5b3");		
+},function(){
+	$(this).css("border","1px solid #EDEDED");		
+});
+$("#pannel li").live("mouseover",function(){
+	$(this).removeClass("out");
+	$(this).addClass("over");	
+}).live('mouseout',function(){
+	$(this).removeClass("over");
+	$(this).addClass("out");	
+}).live('click',function(){
+	$(".comboxText").val($(this).attr("default"));
+	$("#albumid").val($(this).attr("value"));
+	$.checkForm();
+	$("#pannel").hide();	
+});
+$(".comboxArrow").click(function(){
+	getAlbumList();
+});
+
+$("#btnSaveBoardPic0").click(function(){
+	if ( $(this).hasClass("calloff") )
+	{
+		return false;
+	}
+	else
+	{
+		$(this).removeClass("callon").addClass("calloff").html("发送中...");
+		var loc_url = location.href;
+		$.Collect_Share_Save(this,loc_url);	
+	}
+});
+		
+$(".comboxText").click(function(){
+	getAlbumList();
+});
+$(".comboxArrow").click(function(){
+	getAlbumList();
+});
+
+$.Pub_Count_Bind($("#u_zone_form .PUB_TXT"));
+
+function getAlbumList()
+{
+	var query = new Object();
+	query.aid = ALBUM_SELECT_ID;
+	
+	$.ajax({
+		url: SITE_PATH+"services/service.php?m=share&a=selectalbum",
+		type: "POST",
+		data:query,
+		dataType: "json",
+		success: function(result){
+			$("#pannel").html(result.html);
+			$("#pannel").show();
+		}
+	});
+}
+
+$("body").dblclick(function(){
+	$(".pannel").hide();
+});
+</script>
+<!--{template inc/collection/collection_footer}-->

@@ -1,0 +1,112 @@
+<?php
+	$css_list[0]['url'][] = './tpl/css/zone.css';
+	$js_list[0] = './tpl/js/zone.js';
+    $js_list[1] = './tpl/js/im_006.js';
+?>
+<!--{template inc/header}-->
+<div id="body" class="fm990">
+		<div id="content">
+        	
+            <div id="zhimeisheetbar">
+            	<p class="bar-links">
+                	<span class="selected">{$home_user['albums']} 杂志</span>
+                    &nbsp;·&nbsp;
+                    <a href="{u u/talk uid=$home_uid}">{$home_user['shares']} 采集</a>
+                    &nbsp;·&nbsp;
+                    <a href="{u u/fav uid=$home_uid}">{$home_user['favs']} 喜欢</a>
+             	</p>
+          	</div>
+            
+            <div id="contentMain">
+				<!--{template inc/u/u_menu}-->
+                <!--预加载杂志社数据-->
+            
+            <!--{if $_FANWE['request']['action'] == 'album'}-->
+            <!--{loop $album_list $list}-->
+           
+            <div class="mbox">
+            	<div class="followlist">
+                	<h3 class="mboxTitle">
+                    	<!--{if $list['img_count'] > 0}--><span class="number floatright">({$list['img_count']})</span><!--{/if}-->
+                        <span class="t" title="{$list['title']}">{$list['title']}</span>
+                    </h3>
+                    <div class="list">
+                       <ul>
+                            <!--{eval $j = 1;}-->
+							
+                            <!--{eval $list_img_counts = array(0,0,0,0,0,0,0,0,0);}-->
+                            <!--{loop $list_img_counts $imgkey $imgindex}-->
+                            <!--{eval $img = $list['album_imgs'][$imgkey];}-->
+							<!--{eval $img_animate = $list['album_imgs_animate'][$imgkey];}-->
+                            <!--{if !empty($img)}-->
+                                <li style="*width:60px; *margin-bottom:5px;"><a target="_blank" href="{$list['url']}">
+                                	{if $img_animate}
+									<img src="{$img}" width="60" height="60" />
+									{else}
+									<img src="{getimg $img 60 60 1}" width="60" height="60" />
+									{/if}
+									</a></li>
+                            <!--{else}-->
+							
+                            <li style="*margin-bottom:5px; *width:60px;"><a target="_blank" class="add_img" href="{$list['url']}"><img src="./tpl/images/no-img.gif" width="60" height="60"/></a></li>
+                            
+							<!--{/if}-->
+                            <!--{if $j % 3 != 0}-->
+                            <li><span></span></li>
+                            <!--{/if}-->
+                            <!--{eval $j++;}-->
+                            <!--{/loop}-->
+                        </ul>                     	
+                    </div>
+                   	<div class="follow">
+                   	<!--{if $list['isMe'] == 1}-->
+                        <a href="javascript:void(0)" onclick="$.Edit_Album($list['id'])" class="btn btn13 wbtn unfollow">
+                            <strong>
+                           
+                                编辑
+
+                            </strong><span></span>
+               		 	</a>
+					 <!--{else}-->
+						 <a href="javascript:;" {if $list['isMe'] == $_FANWE['uid']}onclick="$.Edit_Album({$list['id']})" {else}onclick="$.Follow_Album({$list['id']},this)"{/if} class="btn btn13 wbtn unfollow">
+                            <strong>
+                            <!--{if $list['is_follow_album']}-->
+                                取消关注
+                            <!--{else}-->
+                                关注
+                            <!--{/if}-->
+                            </strong><span></span>
+               		 	</a>
+						<!--{/if}-->
+                    </div>
+                 </div>
+            </div>
+            <!--{/loop}-->
+            <!--{/if}-->
+            
+            <!--预加载用户数据-->
+            </div>
+			<div id="imloading" class="firstload" style="display:none;"><img src="./tpl/images/loading-footer.gif" /><span>加载中…</span></div>
+			<div id="firstload" class="firstload" style="display:none;"><img src="./tpl/images/end.png" /> </div>
+		</div>
+	</div>
+</div>
+<script>
+jQuery(function($){
+				
+var linkUrl = '{$link_url}',jsonUrl = '{$json_url}';
+linkUrl = linkUrl +"&v=" +Math.random()*99999999;
+autoLayout_album.init({
+contentID:"contentMain",
+rightLoad:true,
+leftID:["leftLabel"],
+rightID:"",
+linkUrl:linkUrl,
+pageAuto: true,
+loadingID:"imloading"
+});
+autoLayout_album.eachAction(jsonUrl);
+});
+
+</script>
+<!--{template inc/footer}-->

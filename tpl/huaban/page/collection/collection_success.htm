@@ -1,0 +1,24 @@
+<!--{template inc/collection/collection_header}-->
+<div class="shareok">
+	<h1 class=" aligncenter"><span class="true">分享成功！</span></h1>
+	{if $is_index}
+	<p class=" aligncenter" style=' font-size:14px;'>正在审核中，审核通过后将会展示在首页</p>
+	{/if}
+	<p class=" aligncenter">点<a href="{$go_url}" class="lightblue underline">这里</a>查看你发表的分享</p>
+	<p class="gray aligncenter">(<span id="second">1</span>秒后自动跳转)</p>
+</div>
+<script type="text/javascript">
+_second=3;
+countdown=setInterval("fnwrite()",1000);
+function fnwrite(){
+_second--;
+if(_second>0){
+$("#second").html(_second);
+}
+else {
+window.location.href='{$go_url}';
+clearInterval(countdown);
+}
+}
+</script>
+<!--{template inc/collection/collection_footer}-->

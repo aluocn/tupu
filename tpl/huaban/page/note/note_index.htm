@@ -1,0 +1,306 @@
+<?php
+	$css_list[0]['url'][] = './tpl/css/note.css';
+?>
+<!--{template inc/header}-->
+
+<div id="content" class="cf">
+<!--left begin -->
+<div class="CloseupLeft">
+	<div data-seq="9" class="Board wfc">
+    	<h3>{$album_data['title']}</h3>
+        <span class="position">{$current_location}/{$same_album_count}</span>
+        <a href="{u album/show id=$album_data['id']}" class="link x">
+            <!--{loop $other_album_share $photo_share}-->
+				{if $photo_share['is_animate']}
+				<img src="{$photo_share['img']}" width="61" height="61">
+				{else}
+				<img src="{getimg $photo_share['img'] 61 61 1}" width="61" height="61">
+				{/if}
+					
+			<!--{/loop}-->
+        </a>
+        <div class="FollowBoard">
+        	<a href="javascript:;" {if $share_user['uid'] == $_FANWE['uid']}onclick="$.Edit_Album($aid)" {else}onclick="$.Follow_Album({$aid},this)"{/if} class="btn btn13 wbtn unfollow">
+            	<strong>
+                <!--{if $share_user['uid'] == $_FANWE['uid']}-->
+                	编辑
+                <!--{elseif $is_follow_album}-->
+                	取消关注
+                <!--{else}-->
+                	关注
+                <!--{/if}-->
+                </strong><span></span>
+           	</a>
+        </div>
+    </div>
+</div>
+<!--left end-->
+
+<!--right begin-->
+<div class="CloseupRight">
+	<div class="wt clearfix">
+    	<div id="PinPinner">
+        	<a id="PinnerImage" href="{u u/index uid=$share_user['uid']}" class="img">
+            	<img src="{avatar $share_user['uid'] m 1}" width="50" height="50">
+            </a>
+            <p id="PinnerName">
+            	<a href="{u u/index uid=$share_user['uid']}">{$share_user['user_name']}</a>
+            </p>
+            <p id="PinnerStats" class="less">
+                采集于&nbsp;
+                <span data-ts="1329293770" class="ts-words">{$share_detail['time']}</span>
+           	</p>
+       	</div>
+        <div id="PinActionButtons">
+        	<!--{if $share_detail['is_refer'] == 1}-->
+        	<p id="pin_source" class="light">
+            	采自
+               	<a href="{$share_detail['refer_url']}" target="_blank" rel="nofollow"  class="jd-link">{cutstr $share_detail['refer_url'] 32}</a>
+            </p>
+            <!--{/if}-->
+            <ul>
+            	<li class="repin-button">
+                	<a onclick="$.Relay_Share($share_detail['share_id']);" href="javascript:;" class="btn btn13 wbtn">
+                    	<strong><em></em>转采</strong><span></span>
+                    </a>
+               	</li>
+                <li class="like-button">
+                	<a  {if $is_follow}st='like' {else} st='unlike' {/if} href="javascript:;" {if $share_user['uid'] == $_FANWE['uid']} onclick="$.Edit_Share({$share_detail['share_id']})" class="btn wbtn" {else}onclick="$.Fav_Share_hua({$share_detail['share_id']},this);" class="like btn wbtn "{/if}>
+                        <!--{if $share_user['uid'] == $_FANWE['uid']}-->
+                        <strong>编辑</strong><span></span>
+                        <!--{elseif $is_follow}-->
+                        <strong><em></em>取消喜欢</strong><span></span>
+                        <!--{else}-->
+                        <strong><em></em>喜欢</strong><span></span>
+                        <!--{/if}-->
+                    </a>
+               	</li>
+         	</ul>
+       	</div>
+        <div id="pin_img" data-id="1209432" data-media-type="2" data-orig-source="null" class="pin-img">
+          <!--{if $current_type == 'video'}-->
+		  <!--
+                <script type="text/javascript">
+				swfobject.embedSWF("{$current_video}", "show_video", "468", "468", "9.0.0", "expressInstall.swf");
+				</script>
+				<div  id="img_height">
+                	<div id="show_video" >
+                		This text is replaced by the Flash movie.
+                	</div>
+                </div>
+		-->
+				<embed src="{$current_video}" allowFullScreen="true"  wmode="transparent"  quality="high" width="468" height="468" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash">
+				</embed>
+
+                <!--{else}-->
+               <a href="{if $share_detail['is_refer'] == 1} $share_detail['refer_url']{else}{$current_img}{/if}" target="_blank" rel="nofollow" class="jd-link">
+            	{if $current_img_arr['is_animate']}
+				<img alt="采集图片" src="{$current_img}" width="{$current_img_arr['img_width']}">
+           	   {else}
+			   <img alt="采集图片" src="{getimg $current_img 468 468}">
+			   {/if}
+			   </a>
+            <a id="zoomr_show" href="{$current_img}" title="查看原图" target="_blank"></a>
+                <!--{/if}-->
+        	
+       	</div>
+        <div id="pin_caption" class="pin-caption">
+        	<p class="text">{$share_detail['content']}</p>
+        
+       	</div>
+        <div id="pin_comments"></div>
+        <div id="PinAddComment" data-id="1209432" class="clearfix">
+        <!--{if $_FANWE['uid']}-->
+        <div id="PinInputArea">
+        <form method="post">
+		<input type="hidden" value="0" id="replyCommentId">
+		<div class="newcomment cf">
+			<input type="hidden" value="{$share_detail['share_id']}" name="share_id">
+            <input type="hidden" value="0" name="parent_id" >
+            <a href="javascript:;"  class="img">
+				<img src="{avatar $_FANWE['uid'] m 1}" width="50" height="50" class="avatar" style="margin-top:5px;">
+            </a>
+			<span class="ta-span InputContainer" style=" margin-left:0px;width:463px;">
+				<textarea id="commentta" name="content" length="140" position="0" class="PUB_TXT" style="display: inline-block; height: 60px; width:457px;background:url(./tpl/huaban/images/textarea-bg.gif) 0 0 no-repeat;border:0;">说点什么吧……</textarea>			<div id="divconfirm" style="display: none;">
+             <div class="clearfix"></div>
+				<a id="btnSaveComment" class="disabled btn btn13 wbtn mtb2" href="javascript:;" onclick="$.Add_Share_Comment(this,'#SHARE_COMMENT_LIST_{$share_detail['share_id']}')"><strong> 添加评论</strong><span></span></a>
+		</div>
+        
+	</span>
+</div>
+
+<div id="SHARE_COMMENT_LIST_BOX" class="commentlist">
+	<ul id="SHARE_COMMENT_LIST_{$share_detail['share_id']}" class="c_l rb5">
+		<!--{loop $share_detail['comments'] $comment}-->
+			<li class="c_f" id="COMMENT_{$comment['comment_id']}">
+            	<div class="uhead">
+					<a href="{u u/index uid=$comment['uid']}">
+                		<img src="{avatar $comment['uid'] m 1}" width="60" height="60">
+                	</a>
+                </div>
+                <div class="usay">
+                	<h3 class="cf">	
+                    	<!--{if $is_remove_comment}-->	
+                    	<span class="floatright gray">
+                        	<a onClick="$.Delete_Comment($comment['comment_id'],this);" class="del blue" w="f" href="javascript:void(0);">删除</a>
+                        </span>
+                        <!--{/if}-->
+                        <span class="floatright gray pd15">
+                        	<a class="rpl blue" w="f" href="javascript:;" uname='{$comment['user']['user_name']}' cid="{$comment['comment_id']}" onClick="$.Reply_Comment(this);">回复</a>
+                        </span>
+                        <span class="f14 blue"><a href="{u u/index uid=$comment['uid']}" class="blue">{$comment['user']['user_name']}</a></span>		
+                    </h3>
+                	<p>{$comment['content']}</p>
+                    <span class="gray">
+                    		{$comment['time']}
+                    </span>
+                </div>
+			</li>
+		<!--{/loop}-->
+	</ul>
+    <div class="blank10"></div>
+	<div class="pagination">
+		<!--{subtemplate inc/pages}-->
+	</div>
+</div>
+</form>
+				<div id="page"></div>
+         	</div>
+            <!--{else}-->
+            <div id="PinInputArea">
+            	<a href="javascript:;" class="img">
+                	<img src="./tpl/images/default_buddy_icon.jpg" class="avatar">
+                </a>
+                <div class="InputContainer Form FancyForm">
+                	<textarea id="CloseupComment" name="caption"  disabled="disabled"></textarea>
+                    <label class="unauth">
+                    	回复需要
+                        <a href="{u user/login}">登录</a>或
+                        <a target="_blank" href="{u user/register}">立即注册{$_FANWE['setting']['site_name']}帐号</a>
+                    </label>
+                    <span class="fff"></span>
+              	</div>
+                <div id="PinAddCommentControls" style="display:none;">
+                	<a id="PostComment" href="#" onclick="return false;" class="disabled btn btn13 wbtn">
+                    	<strong> 添加评论</strong>
+                        <span></span>
+                   	</a>
+               	</div>
+           	</div>
+            <!--{/if}-->      	
+</div>
+        <div id="pin_likes" class="hidden PinActivity clearfix">
+        	<h4>这些人喜欢</h4>
+       	</div>
+        <div id="PinRepins" class="hidden PinActivity clearfix">
+        	<h4>被这些人转采</h4>
+       	</div>
+  	</div>
+</div>
+<!--right end-->
+<div id="pin_toolbar">
+        	<ul>
+            	<li>
+                	<div class="PriorAndNext">
+                    	<a id="prev_disabled" title="上一张" {if $pns['prev'] !=0} href="{u note/index sid=$pns['prev']}"  class="prev x" {else}class="prev x disabled" {/if}></a>
+                        <a title="下一张" {if $pns[next] !=0}href="{u note/index sid=$pns['next']}" class="next x" {else}class="next x disabled"{/if}></a>     
+                <!--{if $pns['prev'] !=0}-->
+                <a class="flow_left" href="{u note/index sid=$pns['prev']}" id="flow_left" style="display:none;"></a>
+                <!--{/if}-->
+                <!--{if $pns[next] !=0}-->
+                <a class="flow_right" href="{u note/index sid=$pns['next']}" id="flow_right" style="display:none;"></a>
+                <!--{/if}-->
+                   	</div>
+             	</li>
+                <li class="share-text">分享到</li>
+                <!--{eval $invite_title = $share_detail['title'];}-->
+                <!--{eval $invite_content = $share_detail['content'];}-->
+                <!--{eval $invite_types = array('douban','sina','qzone');}-->
+                <!--{eval $invite_url = $_FANWE['site_url'].$share_detail['url'];}-->
+                <!--{eval $invite_pic = $_FANWE['site_url'].$current_img;}-->
+                <!--{eval $sns_links = getSnsLink($invite_types,$invite_title,$invite_url,$invite_content,$invite_pic);}-->
+                <li id="share_to_weibo" class="share-btn">
+                	<span><a href="{$sns_links['sina']}">微博</a></span>
+                </li>
+                <li id="share_to_douban" class="share-btn">
+                	<span><a href="{$sns_links['douban']}">豆瓣</a></span>
+                </li>
+                <li id="share_to_Qzone" class="share-btn">
+                	<span><a href="{$sns_links['qzone']}">空间</a></span>
+               	</li>
+          	</ul>
+     	</div>
+</div>
+
+<div class="clear"></div>
+
+<script type="text/javascript">
+function UpdateUserFollow(obj,result)
+{
+	if(result.status == 1)
+	{
+		$(obj).before('<img class="fo_ok" src="./tpl/images/add_ok_03.png">');
+		$(obj).remove();
+	}
+}
+
+jQuery(function(){
+	if ($('#commentta').val() != '' && $('#commentta').val() != '说点什么吧……') {
+        $('#commentta').css({
+            'height': '88px'
+        });
+        $('#commentta').addClass('commentta');
+		$('#divconfirm').show();
+        $('#divconfirm a').removeClass('unconfirm-btn').addClass('confirm-btn');
+        if ($('#commentta').val().length < 141) {
+            $('#divconfirm em').text($('#commentta').val().length).removeClass('overnum');
+            $(this).removeClass('commenttaover')
+        } else {
+            $('#divconfirm em').text($('#commentta').val().length - 140).addClass('overnum');
+            $('commentta').addClass('commenttaover')
+        }
+    }
+	$('#commentta').focus(function() {
+        if ($(this).val() == '说点什么吧……' || $(this).val() == '') {
+            $(this).val('').addClass('commentta');
+        }
+        $('#divconfirm').slideDown();
+        $(this).keyup(function() {
+            var index = ($.trim($(this).val())).length;
+            if (index > 0) {
+                $('#btnSaveComment').removeClass('disabled');
+            } else {
+                $('#btnSaveComment').addClass('disabled');
+                $("#replyCommentId").val(0);
+            }
+            if (index < 141) {
+                $('#divconfirm em').text(index).removeClass('overnum');
+                $(this).removeClass('commenttaover')
+            } else {
+                $('#divconfirm em').text(index - 140).addClass('overnum');
+                var _this = $(this);
+                if (timers !== null) {
+                    return;
+                }
+            }
+        })
+    }).focusout(function() {
+        if ($('#commentta').val().length == 0) {
+            $("#replyCommentId").val(0);
+            $(this).val('说点什么吧……').removeClass('commentta');
+			$('#divconfirm').slideUp();
+            $('#btnSaveComment').addClass('disabled');
+        }
+    }); 
+	CommentInit();
+});
+function CommentInit()
+{
+	$(".pagination a").click(function(){
+		var page = $(this).attr('page');
+		$.Get_Share_Comment("{$share_detail['share_id']}",page,'#SHARE_COMMENT_LIST_BOX',CommentInit);
+		return false;
+	});
+}
+</script>
+<!--{template inc/footer}-->

@@ -1,0 +1,49 @@
+<tagLib name="fanwe" />
+<include file="Public:header" />
+<div class="handle-btns">
+	<fanwe:linkBtn text="{%RETURN_LIST}" href="{:U(MODULE_NAME.'/index')}" />
+</div>
+<form method='post' id="form" name="form" action="{:U(MODULE_NAME.'/update')}">
+<table cellpadding="4" cellspacing="0" border="0" class="table-form">
+	<tr>
+		<th width="200">空间名称:</th>
+		<td><input type="text" class="textinput requireinput" name="space_name" value="{$UpYun.space_name}" /></td>
+	</tr>
+	
+	<tr>
+		<th>操作员:</th>
+		<td><input type="text" class="textinput requireinput" name="user" value="{$UpYun.user}" /></td>
+	</tr>
+	
+	<tr>
+		<th>密码:</th>
+		<td><input type="text" class="textinput requireinput" name="password" value="{$UpYun.password}"  /></td>
+	</tr>
+	<tr>
+		<th>图片网址:</th>
+		<td><input type="text" class="textinput requireinput" name="url" value="http://"  />(在upyun后台 <span style='color:red;'>域名绑定</span>，可以看到;包含http://)</td>
+	</tr>
+	
+	<tr>
+		<th>是否开启</th>
+		<td>
+			<select name="status" ">
+				<option value="1" <if condition="$UpYun['status'] eq 1">selected="selected"</if>>是</option>
+				<option value="0" <if condition="$UpYun['status'] eq 0">selected="selected"</if>>否</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td><span style="color: red;">开通成功后,用户可以登录查看相应的信息<a href="https://www.upyun.com/?md=fanwe" target="_blank">登录</a></span></td>
+	</tr>
+	<tr class="act">
+		<th>&nbsp;</th>
+		<td>
+			<input type="submit" class="submit_btn" value="修改" />
+			<input type="reset" class="reset_btn" value="{%RESET}" />
+		</td>
+	</tr>
+</table>
+</form>
+<include file="Public:footer" />

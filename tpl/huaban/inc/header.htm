@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title><!--{if !empty($_FANWE['nav_title'])}-->{$_FANWE['nav_title']} - <!--{/if}--><!--{if empty($no_site_name)}-->{$_FANWE['setting']['site_title']}<!--{/if}--></title>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<meta name="keywords" content="{$_FANWE['seo_keywords']}{$_FANWE['setting']['site_keywords']}" />
+	<meta name="description" content="{$_FANWE['seo_description']}{$_FANWE['setting']['site_description']}" />
+	<link rel="icon" href="{$_FANWE['site_root']}favicon.ico" type="image/x-icon" />
+	<?php
+		$default_js[] = './public/js/jquery.js';
+		$default_js[] = './public/js/base.js';
+        $default_js[] = './public/js/jquery.easing.js';
+		$default_js[] = './public/js/jquery.lazyload.js';
+        $default_js[] = './public/js/swfobject.js';
+	?>
+	<script type="text/javascript" src="{script $default_js}"></script>
+   <script src='ZeroClipboard.js'></script>
+   <script language="JavaScript">
+		var clip = null;
+		function init_copy() {
+			clip = new ZeroClipboard.Client();
+			clip.setHandCursor( true );
+			clip.glue('ClipBoard');
+			clip.addEventListener('mouseOver', function (client) {
+				// update the text on mouse over
+				clip.setText( document.getElementById('invite_link').value );
+			});
+			clip.addEventListener('onMouseUp', function (client) {
+				alert('复制成功');
+				
+			});
+		}
+		
+	</script>
+	<?php
+		$current_css[] = './tpl/css/reset.css';
+		$current_css[] = './tpl/css/base.css';
+		$current_css[] = './tpl/css/globe.css';
+		$current_css[] = './tpl/css/publishbox.css';
+		$current_css[] = './tpl/css/lightbox.css';
+		$current_css[] = './tpl/css/addfav.css';
+	?>
+	
+	
+	 
+	<link rel="stylesheet" type="text/css" href="{css $current_css}" media="all"/>
+    
+	<!--{loop $css_list $css}-->
+	<link rel="stylesheet" type="text/css" href="{css $css['url']}"{if !empty($css['media'])} media="{$css['media']}"{/if} />
+	<!--{/loop}-->
+	<script type="text/javascript">
+		var SITE_PATH = '$_FANWE[site_root]';
+		var SITE_URL = '$_FANWE[site_url]';
+		var TPL_PATH = '{TPL_PATH}';
+		var PUBLIC_PATH	 = '{PUBLIC_PATH}';
+		var MODULE_NAME	 = '{MODULE_NAME}';
+		var ACTION_NAME	 = '{ACTION_NAME}';
+		var COOKIE_PRE = "$_FANWE['config']['cookie']['cookie_pre']";
+		var TPL_NAME = '$_FANWE["setting"]["site_tmpl"]';
+	</script>
+	<style>
+	.iepng{ behavior:url("iepngfix.htc"); }
+	</style>
+</head>
+<body>
+<?php
+   if(DIANGAO_JS){
+ 
+   	echo DIANGAO_JS;//添加diangao广告
+   }
+   
+   ?>
+
+<div id="pagewrap">
+	<!--新头部开始-->
+        <div id="header" class="cf">
+            <!--newhead-->
+            <div id="header-1" class="header-1">
+                <div class="topsysmenu cf" id="topsysmenu" {if $_FANWE['module_name'] == 'Note'} style="width:852px;"{/if}>
+                    <a href="{u index/index}" class="mainlogo " {if $_FANWE['module_name'] == 'Note'}id="head_logo"{/if}><img class='iepng' src="{$_FANWE['site_root']}{$_FANWE['setting']['site_logo']}" /></a>
+                    <div class="menu_bar">
+                        <!--{dynamic getUserInfo}-->
+                        <div class="topsearch">
+                            <div class="searchrelt cf">
+                                <form action="{u book/search}" method="post" onsubmit="return false;">
+                                    <input type="text" class="inputtext" id="jquery-search" autocomplete="off" value="搜索你喜欢的" onfocus="if(this.value=='搜索你喜欢的'){this.value='';this.style.color='#333';}" onblur="if(this.value==''){this.value='搜索你喜欢的';this.style.color='#cccccc';}">
+                                    <input type="submit" value=" " class="searchbt" id="fm_hd_btm_shbx_bttn" />
+                                    <input type="hidden" name="action" value="search" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--{if $_FANWE['uid'] == 0}-->
+            <div id="header-3">
+            	<div class="toplogin" id="toplogin" {if $_FANWE['module_name'] == 'Note'} style='width:852px;'{/if}>
+                	<div id="intro" {if $_FANWE['module_name'] == 'Note'} style="margin-left: 237px;
+margin-top: 15px;"{/if}>
+                    	<h2>{$_FANWE['setting']['site_name']}，采集你喜欢的。</h2>
+                        <div class="unauth-btns">
+                        	<a href="{u user/register}" id="res-btn">
+                            	<strong> 限时开放注册 »</strong>
+                            </a>
+                            <a id="login_btn" href="{u user/login}" class="btl">
+                            	<strong><em></em><span> 登录</span></strong>
+                            </a>
+                        </div>
+						<!--{if $_FANWE['setting']['site_video']}-->
+						
+                        <a id="mv_trigger" href="#" onclick="app.showDialog('mv');return false;" title="观看视频，了解{$_FANWE['setting']['site_name']}" class="mv">
+                        	<embed src="{$_FANWE['setting']['site_video']}" allowfullscreen="true" wmode="transparent" quality="high" width="178" height="104" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash">
+                        </a>
+						<!--{/if}-->
+                    </div>	
+                </div>
+            </div>
+            <!--{/if}-->
+           {if $_FANWE['module_name'] == 'Index'}
+            <div id="header-2" class="header-2" >
+                <div class="topchannel" id="topchannel">
+                    <div class="channelmenu">
+                        <a href="{u index sy=hot}" {if $_FANWE['request']['sy'] == 'hot' } class="current" {/if}>热门采集</a>
+						<a href="{u index sy=pic}" {if $_FANWE['request']['sy'] == 'pic' } class="current" {/if}>美图采集</a>
+                        <a href="{u index sy=video}" {if $_FANWE['request']['sy'] == 'video' } class="current" {/if}>视频采集</a>
+						<a href="{u index sy=goods}" {if $_FANWE['request']['sy'] == 'goods' } class="current" {/if}>商品采集</a>
+                        <a href="{u index sy=all}" {if $_FANWE['request']['sy'] == 'all'} class="current" {/if}>全部采集</a>
+                    </div>
+                </div>
+            </div>
+            {/if}
+    </div>
+    <script>
+		jQuery(function($){
+			$("#jquery-search").focus(function(){
+  				$(this).css('background-color','white');
+			});
+			$("#jquery-search").blur(function(){
+  				$(this).css('background-color','#FAF7F7');
+			});
+		});
+	</script>
+	<div class="clear"></div>
+	<!--新头部结束-->
+	<div id="body_wrap">

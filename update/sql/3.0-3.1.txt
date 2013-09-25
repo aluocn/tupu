@@ -1,0 +1,7 @@
+增加采集分类和部分页面的seo优化
+增加sitemap
+表XXX_collect_cate是采集分类对应的表
+表XXX_page_seo页面优化信息对应的表
+升级sina同步登陆接口至2.0
+表XXX_user增加了个字段用于存放sina同步登陆返回的头像地址
+替换原来的分享代码为百度的分享代码

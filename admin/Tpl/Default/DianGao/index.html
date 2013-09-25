@@ -1,0 +1,62 @@
+<tagLib name="fanwe" />
+<include file="Public:header" />
+<script type="text/javascript" src="__TMPL__Static/Js/dataList.js"></script>
+<if condition="$is_has eq 1">
+	<form method='post' id="form" name="form" action="{:U(MODULE_NAME.'/update')}">
+<table cellpadding="4" cellspacing="0" border="0" class="table-form">
+	<tr>
+		<th width="200">站点名称:</th>
+		<td><input type="text" class="textinput requireinput" name="sitename" value="{$diangao.sitename}" /></td>
+	</tr>
+	
+	<tr>
+		<th>站点url:</th>
+		<td><input type="text" class="textinput requireinput" name="siteurl" value="{$diangao.siteurl}" />(不包含http://)</td>
+	</tr>
+	
+	<tr>
+		<th>站长联系邮箱:</th>
+		<td><input type="text" class="textinput requireinput" name="useremail" value="{$diangao.useremail}"  />(请务必使用真实邮箱)</td>
+	</tr>
+	<tr>
+		<th>JS代码:</th>
+		<td>
+			<textarea name="diangao_js" id="diangao_js" style="width: 300px; height: 70px;">{$diangao.diangao_js}</textarea>
+		</td>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<td><span style="color: red;">一键开通成功后点告联盟账户登录用户信息将直接发送到邮箱中,用户可以登录查看相应的信息</span></td>
+	</tr>
+	<tr class="act">
+		<th>&nbsp;</th>
+		<td>
+			<input type="submit" class="submit_btn" value="修改" />
+			<input type="reset" class="reset_btn" value="{%RESET}" />
+		</td>
+	</tr>
+</table>
+</form>
+	
+	<else />
+	<style>
+		.no_register{ width: 200px;}
+		.no_register_1,
+		.no_register_2{ width:100px; height:25px;line-height: 25px;
+					 	text-align: center;border: 1px solid red;
+					 	cursor: pointer;margin-bottom: 8px;display: block;
+					  }
+		
+	</style>
+	<div class="no_register">
+		<a href="{:U(MODULE_NAME.'/add')}" class="no_register_1">未注册</a>
+		<a href="{:U(MODULE_NAME.'/edit')}" class="no_register_2">已注册</a>
+	</div>
+	<script>
+		$(function(){
+			
+		});
+	</script>
+</if>
+
+<include file="Public:footer" />
